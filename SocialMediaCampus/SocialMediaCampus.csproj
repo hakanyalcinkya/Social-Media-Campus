@@ -1,0 +1,703 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.2\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.2\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4698BE99-2F69-4D3D-8B2D-495FE4F98845}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SocialMediaCampus</RootNamespace>
+    <AssemblyName>SocialMediaCampus</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.2\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.0\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\lightbox.css" />
+    <Content Include="Content\lightbox.min.css" />
+    <Content Include="Content\model.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="divergent-html\blog.html" />
+    <Content Include="divergent-html\css\animate.css" />
+    <Content Include="divergent-html\css\colors.css" />
+    <Content Include="divergent-html\css\contactform.css" />
+    <Content Include="divergent-html\css\font-awesome.min.css" />
+    <Content Include="divergent-html\css\icons\dummy.png" />
+    <Content Include="divergent-html\css\icons\left.png" />
+    <Content Include="divergent-html\css\icons\next-dark.png" />
+    <Content Include="divergent-html\css\icons\next-light.png" />
+    <Content Include="divergent-html\css\icons\play-pause-dark.png" />
+    <Content Include="divergent-html\css\icons\play-pause-light.png" />
+    <Content Include="divergent-html\css\icons\playpause.png" />
+    <Content Include="divergent-html\css\icons\prev-dark.png" />
+    <Content Include="divergent-html\css\icons\prev-light.png" />
+    <Content Include="divergent-html\css\icons\right.png" />
+    <Content Include="divergent-html\css\icons\swatches\0,0,0,20.png" />
+    <Content Include="divergent-html\css\icons\swatches\0,0,0,30.png" />
+    <Content Include="divergent-html\css\icons\swatches\255,255,255,40.png" />
+    <Content Include="divergent-html\css\images\raster%402x.png" />
+    <Content Include="divergent-html\css\images\raster.png" />
+    <Content Include="divergent-html\css\images\raster_dot%402x.png" />
+    <Content Include="divergent-html\css\images\raster_dot.png" />
+    <Content Include="divergent-html\css\lightgallery.css" />
+    <Content Include="divergent-html\css\mCSB_buttons.png" />
+    <Content Include="divergent-html\css\media.css" />
+    <Content Include="divergent-html\css\nerveslider.css" />
+    <Content Include="divergent-html\css\nojs.css" />
+    <Content Include="divergent-html\css\normalize.css" />
+    <Content Include="divergent-html\css\scrollbar.css" />
+    <Content Include="divergent-html\css\style.css" />
+    <Content Include="divergent-html\css\tooltipster.css" />
+    <Content Include="divergent-html\css\youtube-player.css" />
+    <Content Include="divergent-html\documentation\assets\css\bootstrap-responsive.css" />
+    <Content Include="divergent-html\documentation\assets\css\bootstrap.css" />
+    <Content Include="divergent-html\documentation\assets\img\glyphicons-halflings-white.png" />
+    <Content Include="divergent-html\documentation\assets\img\glyphicons-halflings.png" />
+    <Content Include="divergent-html\documentation\assets\js\bootstrap.min.js" />
+    <Content Include="divergent-html\documentation\assets\js\google-code-prettify\prettify.css" />
+    <Content Include="divergent-html\documentation\assets\js\google-code-prettify\prettify.js" />
+    <Content Include="divergent-html\documentation\assets\js\init.js" />
+    <Content Include="divergent-html\documentation\assets\js\jquery.js" />
+    <Content Include="divergent-html\documentation\images\1.png" />
+    <Content Include="divergent-html\documentation\images\2.png" />
+    <Content Include="divergent-html\documentation\images\3a.png" />
+    <Content Include="divergent-html\documentation\images\3b.png" />
+    <Content Include="divergent-html\documentation\images\4.png" />
+    <Content Include="divergent-html\documentation\images\5.png" />
+    <Content Include="divergent-html\documentation\images\colors.png" />
+    <Content Include="divergent-html\documentation\images\fonts.png" />
+    <Content Include="divergent-html\documentation\images\map1.jpg" />
+    <Content Include="divergent-html\documentation\images\map2.jpg" />
+    <Content Include="divergent-html\documentation\images\map3.jpg" />
+    <Content Include="divergent-html\documentation\images\map4.jpg" />
+    <Content Include="divergent-html\documentation\images\Screenshot_1.png" />
+    <Content Include="divergent-html\documentation\index.html" />
+    <Content Include="divergent-html\features.html" />
+    <Content Include="divergent-html\fonts\fontawesome-webfont.svg" />
+    <Content Include="divergent-html\fonts\lg.svg" />
+    <Content Include="divergent-html\fonts\raleway-bold-webfont.svg" />
+    <Content Include="divergent-html\fonts\raleway-regular-webfont.svg" />
+    <Content Include="divergent-html\images\down.png" />
+    <Content Include="divergent-html\images\favicon.ico" />
+    <Content Include="divergent-html\images\loading.gif" />
+    <Content Include="divergent-html\images\loading2.gif" />
+    <Content Include="divergent-html\images\photos\1000.png" />
+    <Content Include="divergent-html\images\photos\1200.png" />
+    <Content Include="divergent-html\images\photos\150.png" />
+    <Content Include="divergent-html\images\photos\480.png" />
+    <Content Include="divergent-html\images\photos\70.png" />
+    <Content Include="divergent-html\images\photos\800.png" />
+    <Content Include="divergent-html\images\pin.png" />
+    <Content Include="divergent-html\images\search.png" />
+    <Content Include="divergent-html\images\up.png" />
+    <Content Include="divergent-html\images\video-play.png" />
+    <Content Include="divergent-html\images\vimeo-play.png" />
+    <Content Include="divergent-html\images\youtube-play.png" />
+    <Content Include="divergent-html\index.html" />
+    <Content Include="divergent-html\js\accordion.js" />
+    <Content Include="divergent-html\js\backstretch.min.js" />
+    <Content Include="divergent-html\js\custom.js" />
+    <Content Include="divergent-html\js\galleries.js" />
+    <Content Include="divergent-html\js\googlemap.js" />
+    <Content Include="divergent-html\js\home-custom.js" />
+    <Content Include="divergent-html\js\html5.js" />
+    <Content Include="divergent-html\js\jflickrfeed.min.js" />
+    <Content Include="divergent-html\js\jquery-1.11.3.min.js" />
+    <Content Include="divergent-html\js\jquery-ui-custom.min.js" />
+    <Content Include="divergent-html\js\jquery.ascensor.min.js" />
+    <Content Include="divergent-html\js\jquery.tooltipster.min.js" />
+    <Content Include="divergent-html\js\lightgallery.js" />
+    <Content Include="divergent-html\js\nerveslider.min.js" />
+    <Content Include="divergent-html\js\portfolio-trigger.js" />
+    <Content Include="divergent-html\js\quovolver.js" />
+    <Content Include="divergent-html\js\scrollbar.js" />
+    <Content Include="divergent-html\js\tabs.js" />
+    <Content Include="divergent-html\js\wookmark.js" />
+    <Content Include="divergent-html\js\youtube-player.js" />
+    <Content Include="divergent-html\single-slider.html" />
+    <Content Include="divergent-html\single-video.html" />
+    <Content Include="divergent-html\single.html" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="scripts\all1.js" />
+    <Content Include="scripts\app1.js" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="scripts\bootstrap.js" />
+    <Content Include="scripts\bootstrap.min.js" />
+    <None Include="scripts\jquery-3.1.1-vsdoc.js" />
+    <Content Include="scripts\jquery-3.1.1.js" />
+    <Content Include="scripts\jquery-3.1.1.min.js" />
+    <Content Include="scripts\jquery-3.1.1.slim.js" />
+    <Content Include="scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="scripts\lightbox.js" />
+    <Content Include="scripts\lightbox.min.js" />
+    <Content Include="social-1\blank.html" />
+    <Content Include="social-1\css\app\app.css" />
+    <Content Include="social-1\css\app\charts.css" />
+    <Content Include="social-1\css\app\chat.css" />
+    <Content Include="social-1\css\app\colors-alerts.css" />
+    <Content Include="social-1\css\app\colors-background.css" />
+    <Content Include="social-1\css\app\colors-buttons.css" />
+    <Content Include="social-1\css\app\colors-calendar.css" />
+    <Content Include="social-1\css\app\colors-progress-bars.css" />
+    <Content Include="social-1\css\app\colors-text.css" />
+    <Content Include="social-1\css\app\cover.css" />
+    <Content Include="social-1\css\app\essentials.css" />
+    <Content Include="social-1\css\app\layout.css" />
+    <Content Include="social-1\css\app\main.css" />
+    <Content Include="social-1\css\app\maps.css" />
+    <Content Include="social-1\css\app\media.css" />
+    <Content Include="social-1\css\app\navbar.css" />
+    <Content Include="social-1\css\app\sidebar-skins.css" />
+    <Content Include="social-1\css\app\sidebar.css" />
+    <Content Include="social-1\css\app\timeline.css" />
+    <Content Include="social-1\css\fonts\fontawesome-webfont.svg" />
+    <Content Include="social-1\css\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="social-1\css\fonts\Material-Design-Iconic-Font.svg" />
+    <Content Include="social-1\css\fonts\picto-foundry-arrows.svg" />
+    <Content Include="social-1\css\fonts\picto-foundry-clothing.svg" />
+    <Content Include="social-1\css\fonts\picto-foundry-emotions.svg" />
+    <Content Include="social-1\css\fonts\picto-foundry-food.svg" />
+    <Content Include="social-1\css\fonts\picto-foundry-general.svg" />
+    <Content Include="social-1\css\fonts\picto-foundry-household.svg" />
+    <Content Include="social-1\css\fonts\picto-foundry-medical-science.svg" />
+    <Content Include="social-1\css\fonts\picto-foundry-multimedia.svg" />
+    <Content Include="social-1\css\fonts\picto-foundry-nature.svg" />
+    <Content Include="social-1\css\fonts\picto-foundry-shopping-finance.svg" />
+    <Content Include="social-1\css\fonts\picto-foundry-sports.svg" />
+    <Content Include="social-1\css\fonts\picto-foundry-vehicle-navigation.svg" />
+    <Content Include="social-1\css\fonts\picto-foundry-weather.svg" />
+    <Content Include="social-1\css\skin-blue.css" />
+    <Content Include="social-1\css\skin-brown.css" />
+    <Content Include="social-1\css\skin-orange.css" />
+    <Content Include="social-1\css\skin-purple.css" />
+    <Content Include="social-1\css\vendor\ajax-loader.gif" />
+    <Content Include="social-1\css\vendor\all.css" />
+    <Content Include="social-1\css\vendor\bootstrap-slider.css" />
+    <Content Include="social-1\css\vendor\bootstrap.css" />
+    <Content Include="social-1\css\vendor\datepicker3.css" />
+    <Content Include="social-1\css\vendor\daterangepicker-bs3.css" />
+    <Content Include="social-1\css\vendor\font-awesome.css" />
+    <Content Include="social-1\css\vendor\fonts\slick.svg" />
+    <Content Include="social-1\css\vendor\jquery-jvectormap.css" />
+    <Content Include="social-1\css\vendor\jquery.bootstrap-touchspin.css" />
+    <Content Include="social-1\css\vendor\jquery.minicolors.css" />
+    <Content Include="social-1\css\vendor\material-design-iconic-font.css" />
+    <Content Include="social-1\css\vendor\morris.css" />
+    <Content Include="social-1\css\vendor\owl.carousel.css" />
+    <Content Include="social-1\css\vendor\picto.css" />
+    <Content Include="social-1\css\vendor\railscasts.css" />
+    <Content Include="social-1\css\vendor\select2-spinner.gif" />
+    <Content Include="social-1\css\vendor\select2.css" />
+    <Content Include="social-1\css\vendor\select2.png" />
+    <Content Include="social-1\css\vendor\select2x2.png" />
+    <Content Include="social-1\css\vendor\slick.css" />
+    <Content Include="social-1\css\vendor\ui.fancytree.css" />
+    <Content Include="social-1\essential-buttons.html" />
+    <Content Include="social-1\essential-forms.html" />
+    <Content Include="social-1\essential-grid.html" />
+    <Content Include="social-1\essential-icons.html" />
+    <Content Include="social-1\essential-progress.html" />
+    <Content Include="social-1\essential-tables.html" />
+    <Content Include="social-1\essential-tabs.html" />
+    <Content Include="social-1\images\flags\Flag_of_France.svg" />
+    <Content Include="social-1\images\flags\Flag_of_Germany.svg" />
+    <Content Include="social-1\images\flags\Flag_of_Poland.svg" />
+    <Content Include="social-1\images\flags\Flag_of_Romania.svg" />
+    <Content Include="social-1\images\flags\Flag_of_the_United_States.svg" />
+    <Content Include="social-1\images\food1-full.jpg" />
+    <Content Include="social-1\images\food1-wide.jpg" />
+    <Content Include="social-1\images\food1.jpg" />
+    <Content Include="social-1\images\lock-1.jpg" />
+    <Content Include="social-1\images\people\110\child-1.jpg" />
+    <Content Include="social-1\images\people\110\guy-1.jpg" />
+    <Content Include="social-1\images\people\110\guy-2.jpg" />
+    <Content Include="social-1\images\people\110\guy-3.jpg" />
+    <Content Include="social-1\images\people\110\guy-4.jpg" />
+    <Content Include="social-1\images\people\110\guy-5.jpg" />
+    <Content Include="social-1\images\people\110\guy-6.jpg" />
+    <Content Include="social-1\images\people\110\guy-7.jpg" />
+    <Content Include="social-1\images\people\110\guy-8.jpg" />
+    <Content Include="social-1\images\people\110\guy-9.jpg" />
+    <Content Include="social-1\images\people\110\woman-1.jpg" />
+    <Content Include="social-1\images\people\110\woman-10.jpg" />
+    <Content Include="social-1\images\people\110\woman-2.jpg" />
+    <Content Include="social-1\images\people\110\woman-3.jpg" />
+    <Content Include="social-1\images\people\110\woman-4.jpg" />
+    <Content Include="social-1\images\people\110\woman-5.jpg" />
+    <Content Include="social-1\images\people\110\woman-6.jpg" />
+    <Content Include="social-1\images\people\110\woman-7.jpg" />
+    <Content Include="social-1\images\people\110\woman-8.jpg" />
+    <Content Include="social-1\images\people\110\woman-9.jpg" />
+    <Content Include="social-1\images\people\50\child-1.jpg" />
+    <Content Include="social-1\images\people\50\guy-1.jpg" />
+    <Content Include="social-1\images\people\50\guy-2.jpg" />
+    <Content Include="social-1\images\people\50\guy-3.jpg" />
+    <Content Include="social-1\images\people\50\guy-4.jpg" />
+    <Content Include="social-1\images\people\50\guy-5.jpg" />
+    <Content Include="social-1\images\people\50\guy-6.jpg" />
+    <Content Include="social-1\images\people\50\guy-7.jpg" />
+    <Content Include="social-1\images\people\50\guy-8.jpg" />
+    <Content Include="social-1\images\people\50\guy-9.jpg" />
+    <Content Include="social-1\images\people\50\woman-1.jpg" />
+    <Content Include="social-1\images\people\50\woman-10.jpg" />
+    <Content Include="social-1\images\people\50\woman-2.jpg" />
+    <Content Include="social-1\images\people\50\woman-3.jpg" />
+    <Content Include="social-1\images\people\50\woman-4.jpg" />
+    <Content Include="social-1\images\people\50\woman-5.jpg" />
+    <Content Include="social-1\images\people\50\woman-6.jpg" />
+    <Content Include="social-1\images\people\50\woman-7.jpg" />
+    <Content Include="social-1\images\people\50\woman-8.jpg" />
+    <Content Include="social-1\images\people\50\woman-9.jpg" />
+    <Content Include="social-1\images\place1-full.jpg" />
+    <Content Include="social-1\images\place1-wide.jpg" />
+    <Content Include="social-1\images\place1.jpg" />
+    <Content Include="social-1\images\place2-full.jpg" />
+    <Content Include="social-1\images\place2-wide.jpg" />
+    <Content Include="social-1\images\place2.jpg" />
+    <Content Include="social-1\images\place3-full.jpg" />
+    <Content Include="social-1\images\place3-wide.jpg" />
+    <Content Include="social-1\images\place3.jpg" />
+    <Content Include="social-1\images\profile-cover.jpg" />
+    <Content Include="social-1\images\social\100\1.jpg" />
+    <Content Include="social-1\images\social\100\2.jpg" />
+    <Content Include="social-1\images\social\100\3.jpg" />
+    <Content Include="social-1\index.html" />
+    <Content Include="social-1\js\app\all.js" />
+    <Content Include="social-1\js\app\app.js" />
+    <Content Include="social-1\js\app\charts\all.js" />
+    <Content Include="social-1\js\app\charts\easy-pie.js" />
+    <Content Include="social-1\js\app\charts\flot.js" />
+    <Content Include="social-1\js\app\charts\morris.js" />
+    <Content Include="social-1\js\app\charts\sparkline.js" />
+    <Content Include="social-1\js\app\chat.js" />
+    <Content Include="social-1\js\app\essentials.js" />
+    <Content Include="social-1\js\app\layout.js" />
+    <Content Include="social-1\js\app\main.js" />
+    <Content Include="social-1\js\app\maps.js" />
+    <Content Include="social-1\js\app\media.js" />
+    <Content Include="social-1\js\app\player.js" />
+    <Content Include="social-1\js\app\sidebar.js" />
+    <Content Include="social-1\js\app\timeline.js" />
+    <Content Include="social-1\js\vendor\all.js" />
+    <Content Include="social-1\js\vendor\charts\all.js" />
+    <Content Include="social-1\js\vendor\charts\easy-pie\jquery.easypiechart.js" />
+    <Content Include="social-1\js\vendor\charts\flot\all.js" />
+    <Content Include="social-1\js\vendor\charts\flot\jquery.flot.js" />
+    <Content Include="social-1\js\vendor\charts\flot\jquery.flot.orderBars.js" />
+    <Content Include="social-1\js\vendor\charts\flot\jquery.flot.pie.js" />
+    <Content Include="social-1\js\vendor\charts\flot\jquery.flot.resize.js" />
+    <Content Include="social-1\js\vendor\charts\flot\jquery.flot.stack.js" />
+    <Content Include="social-1\js\vendor\charts\morris\all.js" />
+    <Content Include="social-1\js\vendor\charts\morris\morris.js" />
+    <Content Include="social-1\js\vendor\charts\morris\raphael.js" />
+    <Content Include="social-1\js\vendor\charts\sparkline\all.js" />
+    <Content Include="social-1\js\vendor\charts\sparkline\base.js" />
+    <Content Include="social-1\js\vendor\charts\sparkline\chart-bar.js" />
+    <Content Include="social-1\js\vendor\charts\sparkline\chart-box.js" />
+    <Content Include="social-1\js\vendor\charts\sparkline\chart-bullet.js" />
+    <Content Include="social-1\js\vendor\charts\sparkline\chart-discrete.js" />
+    <Content Include="social-1\js\vendor\charts\sparkline\chart-line.js" />
+    <Content Include="social-1\js\vendor\charts\sparkline\chart-pie.js" />
+    <Content Include="social-1\js\vendor\charts\sparkline\chart-tristate.js" />
+    <Content Include="social-1\js\vendor\charts\sparkline\defaults.js" />
+    <Content Include="social-1\js\vendor\charts\sparkline\footer.js" />
+    <Content Include="social-1\js\vendor\charts\sparkline\header.js" />
+    <Content Include="social-1\js\vendor\charts\sparkline\interact.js" />
+    <Content Include="social-1\js\vendor\charts\sparkline\rangemap.js" />
+    <Content Include="social-1\js\vendor\charts\sparkline\simpledraw.js" />
+    <Content Include="social-1\js\vendor\charts\sparkline\utils.js" />
+    <Content Include="social-1\js\vendor\charts\sparkline\vcanvas-base.js" />
+    <Content Include="social-1\js\vendor\charts\sparkline\vcanvas-canvas.js" />
+    <Content Include="social-1\js\vendor\charts\sparkline\vcanvas-vml.js" />
+    <Content Include="social-1\js\vendor\core\all.js" />
+    <Content Include="social-1\js\vendor\core\bootstrap.js" />
+    <Content Include="social-1\js\vendor\core\breakpoints.js" />
+    <Content Include="social-1\js\vendor\core\handlebars.js" />
+    <Content Include="social-1\js\vendor\core\holder.js" />
+    <Content Include="social-1\js\vendor\core\isotope.pkgd.js" />
+    <Content Include="social-1\js\vendor\core\jquery-ui.custom.js" />
+    <Content Include="social-1\js\vendor\core\jquery-ui\core.js" />
+    <Content Include="social-1\js\vendor\core\jquery-ui\draggable.js" />
+    <Content Include="social-1\js\vendor\core\jquery-ui\droppable.js" />
+    <Content Include="social-1\js\vendor\core\jquery-ui\mouse.js" />
+    <Content Include="social-1\js\vendor\core\jquery-ui\position.js" />
+    <Content Include="social-1\js\vendor\core\jquery-ui\resizable.js" />
+    <Content Include="social-1\js\vendor\core\jquery-ui\selectable.js" />
+    <Content Include="social-1\js\vendor\core\jquery-ui\sortable.js" />
+    <Content Include="social-1\js\vendor\core\jquery-ui\widget.js" />
+    <Content Include="social-1\js\vendor\core\jquery.cookie.js" />
+    <Content Include="social-1\js\vendor\core\jquery.debouncedresize.js" />
+    <Content Include="social-1\js\vendor\core\jquery.grid-a-licious.js" />
+    <Content Include="social-1\js\vendor\core\jquery.hotkeys.js" />
+    <Content Include="social-1\js\vendor\core\jquery.js" />
+    <Content Include="social-1\js\vendor\core\jquery.nicescroll.js" />
+    <Content Include="social-1\js\vendor\core\load_image.js" />
+    <Content Include="social-1\js\vendor\core\packery-mode.pkgd.js" />
+    <Content Include="social-1\js\vendor\forms\all.js" />
+    <Content Include="social-1\js\vendor\forms\bootstrap-datepicker.js" />
+    <Content Include="social-1\js\vendor\forms\bootstrap-select.js" />
+    <Content Include="social-1\js\vendor\forms\bootstrap-slider.js" />
+    <Content Include="social-1\js\vendor\forms\bootstrap-switch.js" />
+    <Content Include="social-1\js\vendor\forms\daterangepicker.js" />
+    <Content Include="social-1\js\vendor\forms\jquery.bootstrap-touchspin.js" />
+    <Content Include="social-1\js\vendor\forms\jquery.minicolors.js" />
+    <Content Include="social-1\js\vendor\forms\moment.min.js" />
+    <Content Include="social-1\js\vendor\forms\select2.js" />
+    <Content Include="social-1\js\vendor\maps\google\jquery-ui-map\addons\infobox.js" />
+    <Content Include="social-1\js\vendor\maps\google\jquery-ui-map\addons\infobox_packed.js" />
+    <Content Include="social-1\js\vendor\maps\google\jquery-ui-map\addons\markerclusterer.min.js" />
+    <Content Include="social-1\js\vendor\maps\google\jquery-ui-map\ui\jquery.ui.map.extensions.js" />
+    <Content Include="social-1\js\vendor\maps\google\jquery-ui-map\ui\jquery.ui.map.js" />
+    <Content Include="social-1\js\vendor\maps\google\jquery-ui-map\ui\jquery.ui.map.microdata.js" />
+    <Content Include="social-1\js\vendor\maps\google\jquery-ui-map\ui\jquery.ui.map.microformat.js" />
+    <Content Include="social-1\js\vendor\maps\google\jquery-ui-map\ui\jquery.ui.map.overlays.js" />
+    <Content Include="social-1\js\vendor\maps\google\jquery-ui-map\ui\jquery.ui.map.rdfa.js" />
+    <Content Include="social-1\js\vendor\maps\google\jquery-ui-map\ui\jquery.ui.map.services.js" />
+    <Content Include="social-1\js\vendor\media\all.js" />
+    <Content Include="social-1\js\vendor\media\owl.carousel.js" />
+    <Content Include="social-1\js\vendor\media\slick.js" />
+    <Content Include="social-1\js\vendor\nestable\jquery.nestable.js" />
+    <Content Include="social-1\js\vendor\tables\all.js" />
+    <Content Include="social-1\js\vendor\tables\dataTables.bootstrap.js" />
+    <Content Include="social-1\js\vendor\tables\jquery.dataTables.js" />
+    <Content Include="social-1\js\vendor\tree\jquery.fancytree-all.js" />
+    <Content Include="social-1\login.html" />
+    <Content Include="social-1\messages.html" />
+    <Content Include="social-1\profile.html" />
+    <Content Include="social-1\timeline-list.html" />
+    <Content Include="social-1\users.html" />
+    <Content Include="UploadFile\imageProfil\Logo.png" />
+    <Content Include="UploadFile\Logo.png" />
+    <Content Include="divergent-html\css\font\ytp-regular.eot" />
+    <Content Include="divergent-html\css\font\ytp-regular.ttf" />
+    <Content Include="divergent-html\css\font\ytp-regular.woff" />
+    <Content Include="divergent-html\fonts\fontawesome-webfont.eot" />
+    <Content Include="divergent-html\fonts\fontawesome-webfont.ttf" />
+    <Content Include="divergent-html\fonts\fontawesome-webfont.woff" />
+    <Content Include="divergent-html\fonts\fontawesome-webfont.woff2" />
+    <Content Include="divergent-html\fonts\FontAwesome.otf" />
+    <Content Include="divergent-html\fonts\lg.eot" />
+    <Content Include="divergent-html\fonts\lg.ttf" />
+    <Content Include="divergent-html\fonts\lg.woff" />
+    <Content Include="divergent-html\fonts\raleway-bold-webfont.eot" />
+    <Content Include="divergent-html\fonts\raleway-bold-webfont.ttf" />
+    <Content Include="divergent-html\fonts\raleway-bold-webfont.woff" />
+    <Content Include="divergent-html\fonts\raleway-regular-webfont.eot" />
+    <Content Include="divergent-html\fonts\raleway-regular-webfont.ttf" />
+    <Content Include="divergent-html\fonts\raleway-regular-webfont.woff" />
+    <Content Include="divergent-html\js\jquery-1.11.3.min.map" />
+    <Content Include="divergent-html\processform.php" />
+    <Content Include="scripts\locales\ar.js" />
+    <Content Include="scripts\locales\bg.js" />
+    <Content Include="scripts\locales\ca.js" />
+    <Content Include="scripts\locales\cr.js" />
+    <Content Include="scripts\locales\cz.js" />
+    <Content Include="scripts\locales\da.js" />
+    <Content Include="scripts\locales\de.js" />
+    <Content Include="scripts\locales\el.js" />
+    <Content Include="scripts\locales\es.js" />
+    <Content Include="scripts\locales\fa.js" />
+    <Content Include="scripts\locales\fi.js" />
+    <Content Include="scripts\locales\fr.js" />
+    <Content Include="scripts\locales\hu.js" />
+    <Content Include="scripts\locales\id.js" />
+    <Content Include="scripts\locales\it.js" />
+    <Content Include="scripts\locales\ja.js" />
+    <Content Include="scripts\locales\LANG.js" />
+    <Content Include="scripts\locales\nl.js" />
+    <Content Include="scripts\locales\pl.js" />
+    <Content Include="scripts\locales\pt-BR.js" />
+    <Content Include="scripts\locales\pt.js" />
+    <Content Include="scripts\locales\ro.js" />
+    <Content Include="scripts\locales\ru.js" />
+    <Content Include="scripts\locales\sk.js" />
+    <Content Include="scripts\locales\th.js" />
+    <Content Include="scripts\locales\tr.js" />
+    <Content Include="scripts\locales\uk.js" />
+    <Content Include="scripts\locales\zh-TW.js" />
+    <Content Include="scripts\locales\zh.js" />
+    <Content Include="scripts\modernizr-2.8.3.js" />
+    <Content Include="scripts\plugins\canvas-to-blob.js" />
+    <Content Include="scripts\plugins\canvas-to-blob.min.js" />
+    <Content Include="scripts\plugins\purify.js" />
+    <Content Include="scripts\plugins\purify.min.js" />
+    <Content Include="scripts\plugins\sortable.js" />
+    <Content Include="scripts\plugins\sortable.min.js" />
+    <Content Include="UploadFile\black_light_dark_figures_73356_3840x2160.jpg" />
+    <Content Include="UploadFile\d.jpg" />
+    <Content Include="scripts\ai.0.22.19-build00125.js" />
+    <Content Include="scripts\ai.0.22.19-build00125.min.js" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <None Include="scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="scripts\all.js" />
+    <Content Include="scripts\app.js" />
+    <Content Include="scripts\Color.js" />
+    <None Include="scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="scripts\model.js" />
+    <Content Include="UploadFile\profilImage\child-1.jpg" />
+    <Content Include="Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MainPageController.cs" />
+    <Compile Include="Controllers\SiteUsersController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="HelperViewModel\SharedViewModel.cs" />
+    <Compile Include="Models\MsgJsonResult.cs" />
+    <Compile Include="Models\NumberStudent.cs" />
+    <Compile Include="Models\RoleType.cs" />
+    <Compile Include="Models\SharedModel.cs" />
+    <Compile Include="Models\SiteUsers.cs" />
+    <Compile Include="Models\SocialMediaDBEntities.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\SiteUsers\Index.cshtml" />
+    <Content Include="Views\MainPage\Shares.cshtml" />
+    <Content Include="social-1\css\fonts\fontawesome-webfont.eot" />
+    <Content Include="social-1\css\fonts\fontawesome-webfont.ttf" />
+    <Content Include="social-1\css\fonts\fontawesome-webfont.woff" />
+    <Content Include="social-1\css\fonts\fontawesome-webfont.woff2" />
+    <Content Include="social-1\css\fonts\FontAwesome.otf" />
+    <Content Include="social-1\css\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="social-1\css\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="social-1\css\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="social-1\css\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="social-1\css\fonts\Material-Design-Iconic-Font.eot" />
+    <Content Include="social-1\css\fonts\Material-Design-Iconic-Font.ttf" />
+    <Content Include="social-1\css\fonts\Material-Design-Iconic-Font.woff" />
+    <Content Include="social-1\css\fonts\picto-foundry-arrows.eot" />
+    <Content Include="social-1\css\fonts\picto-foundry-arrows.ttf" />
+    <Content Include="social-1\css\fonts\picto-foundry-arrows.woff" />
+    <Content Include="social-1\css\fonts\picto-foundry-clothing.eot" />
+    <Content Include="social-1\css\fonts\picto-foundry-clothing.ttf" />
+    <Content Include="social-1\css\fonts\picto-foundry-clothing.woff" />
+    <Content Include="social-1\css\fonts\picto-foundry-emotions.eot" />
+    <Content Include="social-1\css\fonts\picto-foundry-emotions.ttf" />
+    <Content Include="social-1\css\fonts\picto-foundry-emotions.woff" />
+    <Content Include="social-1\css\fonts\picto-foundry-food.eot" />
+    <Content Include="social-1\css\fonts\picto-foundry-food.ttf" />
+    <Content Include="social-1\css\fonts\picto-foundry-food.woff" />
+    <Content Include="social-1\css\fonts\picto-foundry-general.eot" />
+    <Content Include="social-1\css\fonts\picto-foundry-general.ttf" />
+    <Content Include="social-1\css\fonts\picto-foundry-general.woff" />
+    <Content Include="social-1\css\fonts\picto-foundry-household.eot" />
+    <Content Include="social-1\css\fonts\picto-foundry-household.ttf" />
+    <Content Include="social-1\css\fonts\picto-foundry-household.woff" />
+    <Content Include="social-1\css\fonts\picto-foundry-medical-science.eot" />
+    <Content Include="social-1\css\fonts\picto-foundry-medical-science.ttf" />
+    <Content Include="social-1\css\fonts\picto-foundry-medical-science.woff" />
+    <Content Include="social-1\css\fonts\picto-foundry-multimedia.eot" />
+    <Content Include="social-1\css\fonts\picto-foundry-multimedia.ttf" />
+    <Content Include="social-1\css\fonts\picto-foundry-multimedia.woff" />
+    <Content Include="social-1\css\fonts\picto-foundry-nature.eot" />
+    <Content Include="social-1\css\fonts\picto-foundry-nature.ttf" />
+    <Content Include="social-1\css\fonts\picto-foundry-nature.woff" />
+    <Content Include="social-1\css\fonts\picto-foundry-shopping-finance.eot" />
+    <Content Include="social-1\css\fonts\picto-foundry-shopping-finance.ttf" />
+    <Content Include="social-1\css\fonts\picto-foundry-shopping-finance.woff" />
+    <Content Include="social-1\css\fonts\picto-foundry-sports.eot" />
+    <Content Include="social-1\css\fonts\picto-foundry-sports.ttf" />
+    <Content Include="social-1\css\fonts\picto-foundry-sports.woff" />
+    <Content Include="social-1\css\fonts\picto-foundry-vehicle-navigation.eot" />
+    <Content Include="social-1\css\fonts\picto-foundry-vehicle-navigation.ttf" />
+    <Content Include="social-1\css\fonts\picto-foundry-vehicle-navigation.woff" />
+    <Content Include="social-1\css\fonts\picto-foundry-weather.eot" />
+    <Content Include="social-1\css\fonts\picto-foundry-weather.ttf" />
+    <Content Include="social-1\css\fonts\picto-foundry-weather.woff" />
+    <Content Include="social-1\css\vendor\fonts\slick.eot" />
+    <Content Include="social-1\css\vendor\fonts\slick.ttf" />
+    <Content Include="social-1\css\vendor\fonts\slick.woff" />
+    <Content Include="Views\MainPage\Profil.cshtml" />
+    <Content Include="scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="scripts\jquery-3.1.1.min.map" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="social-1\js\vendor\maps\google\jquery-ui-map\ui\min\" />
+    <Folder Include="UploadFile\images\" />
+    <Folder Include="UploadFile\image\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>8432</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:8432/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.2\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.2\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

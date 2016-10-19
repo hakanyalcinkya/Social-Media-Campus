@@ -1,0 +1,265 @@
+﻿@using SocialMediaCampus.HelperViewModel
+@using SocialMediaCampus.Models
+@model SharedViewModel
+@{
+    ViewBag.Title = "Shares";
+}
+<link href="~/divergent-html/css/lightgallery.css" rel="stylesheet" />
+<link href="~/Content/lightbox.min.css" rel="stylesheet" />
+<script src="~/divergent-html/js/galleries.js"></script>
+<script src="~/scripts/lightbox.min.js"></script>
+<div class="row">
+
+    <div class="col-md-9">
+        <ul class="timeline-list">
+            @if (Session["Ogrenci"] != null)
+            {
+                SiteUsers user = Session["Ogrenci"] as SiteUsers;
+                <li class="media media-clearfix-xs">
+                    <div class="media-left">
+                        <div class="user-wrapper">
+                            <img src="~/UploadFile/@user.Resimulr" alt="people" class="img-circle" width="80" />
+                            <div><a href="#">@user.FirstName</a></div>
+                            <div class="date">@DateTime.Now.Day @DateTime.Now.ToString("MMM") </div>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <div class="media-body-wrapper">
+                            <div class="row">
+                                <div class="col-md-10 col-lg-8">
+                                    <div class="panel panel-default share clearfix-xs">
+                                        <div class="panel-heading panel-heading-gray title">
+                                            What&acute;s new
+                                        </div>
+                                        <div class="panel-body">
+                                            <textarea name="status" class="form-control share-text" rows="3" placeholder="Lütfen buraya yazınız..."></textarea>
+                                        </div>
+                                        <div class="panel-footer share-buttons">
+                                            <a href="#"><i class="fa fa-photo" data-toggle="modal" data-target="#myModal1"></i></a>
+                                            <a href="#"><i class="fa fa-photo hint--top hint--bounce" aria-label="Fotoğraf Yükle" data-toggle="modal" data-target="#myModal"></i></a>
+                                            <a href="#"><i class="fa fa-video-camera"></i></a>
+                                            <button type="submit" class="btn btn-primary btn-xs pull-right display-none" href="#">Post</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div>
+                </li>
+
+                List<SharedModel> shared = Model.SharedList.OrderByDescending(x => x.SharedDate).ToList();
+
+                foreach (SharedModel item in shared)
+                {
+                    if (item.Type == "image")
+                    {
+                        <li class="media media-clearfix-xs">
+                            <div class="media-left">
+                                <div class="user-wrapper">
+                                    <img src="~/UploadFile/@item.Users.Resimulr" alt="people" class="img-circle" width="80">
+                                    <div><a href="#">@item.Users.FirstName </a></div>
+                                    <div class="date">@item.SharedDate.Day @item.SharedDate.ToString("MMM")</div>
+                                </div>
+                            </div>
+                            <div class="media-body">
+                                <div class="media-body-wrapper">
+                                    <div class="row">
+                                        <div class="media-body">
+                                            <div class="media-body-wrapper">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div class="panel panel-default gallery-grid">
+                                                            <div class="cover overlay hover cover-image-full" style="height: 242px;">
+                                                                <img src="~/UploadFile/image/@item.Path" alt="cover">
+                                                                <a href="~/UploadFile/image/@item.Path" data-lightbox="@item.Id"  class="overlay overlay-full overlay-hover overlay-bg-black clickimage" role="img" style="height: 242px;">
+                                                                    <span class="v-center">
+                                                                        <span class="btn btn-white btn-lg btn-circle"><i class="fa fa-plus"></i></span>
+                                                                    </span>
+                                                                </a>
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                <div>
+                                                                    <p>@item.Text</p>
+                                                                </div>
+                                                                <ul class="comments">
+                                                                    <li clas="media">
+                                                                        <div class="media-left">
+                                                                            <a href="">
+                                                                                <img src="images/people/50/woman-5.jpg" class="media-object">
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="media-body">
+                                                                            <div class="pull-right dropdown" data-show-hover="li" style="display: none;">
+                                                                                <a href="#" data-toggle="dropdown" class="toggle-button">
+                                                                                    <i class="fa fa-pencil"></i>
+                                                                                </a>
+                                                                                <ul class="dropdown-menu" role="menu">
+                                                                                    <li><a href="#">Edit</a></li>
+                                                                                    <li><a href="#">Delete</a></li>
+                                                                                </ul>
+                                                                            </div>
+                                                                            <a href="" class="comment-author">Mary</a>
+                                                                            <span>Wow</span>
+                                                                            <div class="comment-date">2 days</div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="comment-form">
+                                                                        <div class="input-group">
+
+                                                                            <input type="text" class="form-control">
+
+                                                                            <span class="input-group-btn">
+                                                                                <a href="" class="btn btn-default"><i class="fa fa-photo"></i></a>
+                                                                            </span>
+
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </li>
+                    }
+                    else if (item.Type == "images")
+                    {
+                        
+                    }
+
+                }
+
+            }
+
+        </ul>
+    </div>
+</div>
+
+<
+
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                Lütfen bir resim seçiniz.
+            </div>
+            <div class="modal-body">
+                <textarea type="text" class="form-control" rows="4" placeholder="Lütfen birseyler yazın..." name="text" id="text" value=""></textarea>
+                <input type="file" class="form-control" id="file" name="file" value="" />
+                <button class="btn btn-success" type="submit" id="uploadSingle" value="">Paylaş</button>
+            </div>
+            <div class="modal-footer">
+                <div id="warning" class="text-center col-md-12"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                Lütfen bir resim seçiniz.
+            </div>
+            <div class="modal-body">
+                    <textarea type="text" class="form-control" rows="4" placeholder="Lütfen birseyler yazın..." name="text" id="textMulti" value=""></textarea>
+                    <input type="file" class="form-control" id="multiImage" name="files" multiple />
+                    <button class="btn btn-success" type="submit" id="uploadMulti" value="">Paylaş</button>
+                </div>
+            <div class="modal-footer">
+                <div id="warning" class="text-center col-md-12"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    $(function () {
+        var upload = $("<div></div>").addClass("alert alert-success col-md-12");
+        var upload1 = $("<div></div>").addClass("alert alert-warning col-md-12");
+        var upload2 = $("<div></div>").addClass("alert alert-danger col-md-12");
+        $('#uploadSingle').click(function () {
+            var data = new FormData();
+            var files = $("#file").get(0).files;
+            var $_text = $('#text').val();
+
+            data.append("HelpSectionImages", files[0]);
+            data.append("HelpString", $_text);
+
+            $.ajax({
+                url: '/MainPage/SaveProfileImage',
+                type: "POST",
+                processData: false,
+                data: data,
+                dataType: 'json',
+                contentType: false,
+                success: function (response) {
+                    if (response != null || response != '')
+                        $("#warning").append(upload.html(response));
+                    $("#file").val('');
+                    $("#text").val('');
+
+                },
+                error: function (er) {
+                    $("#warning").append(upload2.html(er));
+                }
+
+            });
+            return false;
+        });
+
+
+
+        $('#uploadMulti').click(function () {
+            var data = new FormData();
+            var totalfiles = document.getElementById("multiImage").files.length;
+            for (var i = 0; i < totalfiles; i++) {
+                var file = document.getElementById("multiImage").files[i];
+                data.append("multiImage", file);
+            }
+            var $_text = $('#textMulti').val();
+            data.append("HelpString", $_text);
+            debugger;
+            $.ajax({
+                url: '/MainPage/SaveMultiFile',
+                type: "POST",
+                processData: false,
+                data: data,
+                dataType: 'json',
+                contentType: false,
+                success: function (response) {
+                    if (response != null || response != '')
+                        $("#warning").append(upload.html(response));
+                    $("#file").val('');
+                    $("#text").val('');
+
+                },
+                error: function (er) {
+                    $("#warning").append(upload2.html(er));
+                }
+
+            });
+            return false;
+        });
+
+    });
+
+</script>
+
+
+
+
+
