@@ -58,7 +58,8 @@ namespace SocialMediaCampus.Controllers
                             EMail = email,
                             Password = password,
                             LastAcces = DateTime.Now,
-                            Permisson = "Ogrenci"
+                            Permisson = "Ogrenci",
+                            Resimulr = "Profile.png"
                         });
 
 

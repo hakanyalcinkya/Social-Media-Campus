@@ -1,4 +1,5 @@
-﻿using SocialMediaCampus.Models;
+﻿using SocialMediaCampus.Class;
+using SocialMediaCampus.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace SocialMediaCampus.HelperViewModel
     {
         public List<SiteUsers> UserList { get; set; }
         public List<SharedModel> SharedList { get; set; }
+        public List<UploadMultiFile> UploadMultiList { get; set; }
     }
 }

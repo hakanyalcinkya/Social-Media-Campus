@@ -1,4 +1,5 @@
-﻿using SocialMediaCampus.HelperViewModel;
+﻿using SocialMediaCampus.Class;
+using SocialMediaCampus.HelperViewModel;
 using SocialMediaCampus.Models;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace SocialMediaCampus.Controllers
             SharedViewModel model = new SharedViewModel();
             model.UserList = db.Users.ToList();
             model.SharedList = db.ShareModels.ToList();
+            model.UploadMultiList = db.UploadMultiFiles.ToList();
 
             return View(model);
         }
@@ -38,7 +40,6 @@ namespace SocialMediaCampus.Controllers
                         // var fileName = Path.GetFileName(filebase.FileName);
                         string path = Guid.NewGuid() + "_" + Path.GetExtension(filebase.FileName);
                         filebase.SaveAs(Server.MapPath("~/UploadFile/image/" + path));
-
 
                         SiteUsers user = Session["Ogrenci"] as SiteUsers;
 
@@ -72,40 +73,42 @@ namespace SocialMediaCampus.Controllers
         [HttpPost]
         public ActionResult SaveMultiFile()
         {
-            List<string> fileImage = new List<string>();
+            List<HttpPostedFileBase> fileMulti = new List<HttpPostedFileBase>();
             var text = System.Web.HttpContext.Current.Request.Form["HelpString"];
             if (Request.Files.Count > 0)
             {
-                var pic = System.Web.HttpContext.Current.Request.Files["multiImage"];
-                HttpPostedFileBase filebase = new HttpPostedFileWrapper(pic);
-                var extension = Path.GetExtension(filebase.FileName).ToLower();
-                Guid uniq = Guid.NewGuid();
-                if (extension == ".jpg" || extension == ".png" || extension == ".jpeg")
+                SiteUsers user = Session["Ogrenci"] as SiteUsers;
+                UploadMultiFile upload = new UploadMultiFile();
+                SiteUsers user1 = db.Users.Find(user.Id);
+                SharedModel model = new SharedModel();
+                model.Text = text;
+                model.Type = "images";
+                model.Users = user1;
+                model.SharedDate = DateTime.Now;
+                db.ShareModels.Add(model);
+                for (int i = 0; i < Request.Files.Count; i++)
                 {
-                    foreach (var file in Request.Files)
-                    {
-                        string path = Guid.NewGuid() + "_" + Path.GetExtension(filebase.FileName);
-                        filebase.SaveAs(Server.MapPath("~/UploadFile/images/" + path));
-                        SiteUsers user = Session["Ogrenci"] as SiteUsers;
+                    var file = Request.Files[i];
+                    var extension = Path.GetExtension(file.FileName).ToLower();
 
-                        SiteUsers user1 = db.Users.Find(user.Id);
-                        SharedModel model = new SharedModel();
-                        model.Text = text;
-                        model.Type = "images";
-                        model.Path = path;
-                        model.Users = user1;
-                        model.SharedDate = DateTime.Now;
-                        model.Uniq = uniq;
-                        db.ShareModels.Add(model);
+                    if (extension == ".jpg" || extension == ".png" || extension == ".jpeg")
+                    {
+                        string path = Guid.NewGuid() + "_" + Path.GetExtension(file.FileName);
+                        file.SaveAs(Server.MapPath("~/UploadFile/images/" + path));
+                        upload.SharedModelId = model.Id;
+                        upload.FilePath = path;
+                        db.UploadMultiFiles.Add(upload);
                         db.SaveChanges();
-                        //  return Json("Resimler başarılı bir şekilde kaydedildi...",JsonRequestBehavior.AllowGet);
                     }
-                    
+
+                    //fileMulti.Add(file);
+                    //  return Json("Resimler başarılı bir şekilde kaydedildi...",JsonRequestBehavior.AllowGet);
                 }
-                else
-                {
-                    return Json("Resimler Kaydedilmedi...");
-                }
+                db.SaveChanges();
+            }
+            else
+            {
+                return Json("Lütfen bir resim seçiniz...");
             }
 
 

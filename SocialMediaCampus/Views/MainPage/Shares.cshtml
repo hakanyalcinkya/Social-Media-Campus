@@ -1,13 +1,29 @@
 ﻿@using SocialMediaCampus.HelperViewModel
 @using SocialMediaCampus.Models
+@using SocialMediaCampus.Class
 @model SharedViewModel
 @{
     ViewBag.Title = "Shares";
 }
-<link href="~/divergent-html/css/lightgallery.css" rel="stylesheet" />
-<link href="~/Content/lightbox.min.css" rel="stylesheet" />
-<script src="~/divergent-html/js/galleries.js"></script>
-<script src="~/scripts/lightbox.min.js"></script>
+<link href="~/lightGallery-master/lightGallery-master/dist/css/lightgallery.min.css" rel="stylesheet" />
+<script src="~/lightGallery-master/lightGallery-master/dist/js/lightgallery.min.js"></script>
+<script src="~/lightGallery-master/lightGallery-master/demo/js/lg-fullscreen.min.js"></script>
+<script src="~/lightGallery-master/lightGallery-master/demo/js/lg-pager.min.js"></script>
+<script src="~/lightGallery-master/lightGallery-master/demo/js/lg-zoom.js"></script>
+
+
+
+<script type="text/javascript">
+  
+    
+    $(document).ready(function () {
+        var id;
+        $('.light').click(function () {
+            id = '#' + $(this).data('id');
+        });
+        $('' + id + '').lightGallery();
+    });
+</script>
 <div class="row">
 
     <div class="col-md-9">
@@ -19,7 +35,7 @@
                     <div class="media-left">
                         <div class="user-wrapper">
                             <img src="~/UploadFile/@user.Resimulr" alt="people" class="img-circle" width="80" />
-                            <div><a href="#">@user.FirstName</a></div>
+                            <div><a href="#">@user.FirstName @user.LastName[0].</a></div>
                             <div class="date">@DateTime.Now.Day @DateTime.Now.ToString("MMM") </div>
                         </div>
                     </div>
@@ -73,7 +89,7 @@
                                                         <div class="panel panel-default gallery-grid">
                                                             <div class="cover overlay hover cover-image-full" style="height: 242px;">
                                                                 <img src="~/UploadFile/image/@item.Path" alt="cover">
-                                                                <a href="~/UploadFile/image/@item.Path" data-lightbox="@item.Id"  class="overlay overlay-full overlay-hover overlay-bg-black clickimage" role="img" style="height: 242px;">
+                                                                <a href="~/UploadFile/image/@item.Path" data-lightbox="@item.Id" class="overlay overlay-full overlay-hover overlay-bg-black clickimage" role="img" style="height: 242px;">
                                                                     <span class="v-center">
                                                                         <span class="btn btn-white btn-lg btn-circle"><i class="fa fa-plus"></i></span>
                                                                     </span>
@@ -87,7 +103,7 @@
                                                                     <li clas="media">
                                                                         <div class="media-left">
                                                                             <a href="">
-                                                                                <img src="images/people/50/woman-5.jpg" class="media-object">
+                                                                                <img src="" class="media-object">
                                                                             </a>
                                                                         </div>
                                                                         <div class="media-body">
@@ -132,7 +148,87 @@
                     }
                     else if (item.Type == "images")
                     {
-                        
+
+                        <li class="media media-clearfix-xs">
+                            <div class="media-left">
+                                <div class="user-wrapper">
+                                    <img src="~/UploadFile/@item.Users.Resimulr" alt="people" class="img-circle" width="80">
+                                    <div><a href="#">@item.Users.FirstName </a></div>
+                                    <div class="date">@item.SharedDate.Day @item.SharedDate.ToString("MMM")</div>
+                                </div>
+                            </div>
+                            <div class="media-body">
+                                <div class="media-body-wrapper">
+                                    <div class="row">
+                                        <div class="media-body">
+                                            <div class="media-body-wrapper">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div  class="panel panel-default gallery-grid">
+                                                            <div id="lightgallery_@item.Id" data-id="lightgallery_@item.Id" class="cover overlay hover cover-image-full light" style="height: 242px;">
+                                                                @{
+                                                                    List<UploadMultiFile> multiFile = Model.UploadMultiList.Where(x => x.SharedModelId == item.Id).ToList();
+                                                                }
+                                                            
+                                                                    @foreach (UploadMultiFile file in multiFile)
+                                                                    {
+                                                                        <a href="~/UploadFile/images/@file.FilePath" >
+                                                                            <img src="~/UploadFile/images/@file.FilePath" alt="@item.Text" height="300" width="470"/>
+                                                                        </a>
+                                                                    }
+                                                                
+                                                             <script>  </script>
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                <div>
+                                                                    <p>@item.Text</p>
+                                                                </div>
+                                                                <ul class="comments">
+                                                                    <li clas="media">
+                                                                        <div class="media-left">
+                                                                            <a href="">
+                                                                                <img src="" class="media-object">
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="media-body">
+                                                                            <div class="pull-right dropdown" data-show-hover="li" style="display: none;">
+                                                                                <a href="#" data-toggle="dropdown" class="toggle-button">
+                                                                                    <i class="fa fa-pencil"></i>
+                                                                                </a>
+                                                                                <ul class="dropdown-menu" role="menu">
+                                                                                    <li><a href="#">Edit</a></li>
+                                                                                    <li><a href="#">Delete</a></li>
+                                                                                </ul>
+                                                                            </div>
+                                                                            <a href="" class="comment-author">Mary</a>
+                                                                            <span>Wow</span>
+                                                                            <div class="comment-date">2 days</div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="comment-form">
+                                                                        <div class="input-group">
+
+                                                                            <input type="text" class="form-control">
+
+                                                                            <span class="input-group-btn">
+                                                                                <a href="" class="btn btn-default"><i class="fa fa-photo"></i></a>
+                                                                            </span>
+
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </li>
                     }
 
                 }
@@ -140,10 +236,11 @@
             }
 
         </ul>
+
     </div>
 </div>
 
-<
+
 
 
 <div class="modal fade" id="myModal" role="dialog">
@@ -175,10 +272,10 @@
                 Lütfen bir resim seçiniz.
             </div>
             <div class="modal-body">
-                    <textarea type="text" class="form-control" rows="4" placeholder="Lütfen birseyler yazın..." name="text" id="textMulti" value=""></textarea>
-                    <input type="file" class="form-control" id="multiImage" name="files" multiple />
-                    <button class="btn btn-success" type="submit" id="uploadMulti" value="">Paylaş</button>
-                </div>
+                <textarea type="text" class="form-control" rows="4" placeholder="Lütfen birseyler yazın..." name="text" id="textMulti" value=""></textarea>
+                <input type="file" class="form-control" id="multiImage" name="files" multiple />
+                <button class="btn btn-success" type="submit" id="uploadMulti" value="">Paylaş</button>
+            </div>
             <div class="modal-footer">
                 <div id="warning" class="text-center col-md-12"></div>
             </div>
@@ -187,7 +284,10 @@
     </div>
 </div>
 <script>
+
+
     $(function () {
+
         var upload = $("<div></div>").addClass("alert alert-success col-md-12");
         var upload1 = $("<div></div>").addClass("alert alert-warning col-md-12");
         var upload2 = $("<div></div>").addClass("alert alert-danger col-md-12");
@@ -200,7 +300,7 @@
             data.append("HelpString", $_text);
 
             $.ajax({
-                url: '/MainPage/SaveProfileImage',
+                url: '/MainPage/SaveSingleFile',
                 type: "POST",
                 processData: false,
                 data: data,

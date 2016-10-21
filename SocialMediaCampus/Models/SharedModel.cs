@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SocialMediaCampus.Class;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -21,8 +22,12 @@ namespace SocialMediaCampus.Models
         public string Path { get; set; }
         [DisplayName("File Share Date")]
         public DateTime SharedDate { get; set; }
-        public Guid Uniq { get; set; }
-        public  int UserId { get; set; }
-        public SiteUsers Users { get; set; }
+
+        public int UserId { get; set; }
+        public virtual SiteUsers Users { get; set; }
+        public virtual List<UploadMultiFile> UploadFileList
+        {
+            get; set;
+        }
+        }
     }
-}

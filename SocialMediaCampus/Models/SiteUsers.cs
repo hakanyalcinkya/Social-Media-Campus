@@ -30,6 +30,6 @@ namespace SocialMediaCampus.Models
         [DisplayName("Rol Tipi"),StringLength(20)]
         public string Permisson { get; set; }
 
-        public List<SharedModel> SheredModels { get; set; }
+        public virtual List<SharedModel> SheredModels { get; set; }
     }
 }

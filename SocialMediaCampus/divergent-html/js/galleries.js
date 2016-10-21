@@ -14,8 +14,8 @@ jQuery('#gallery1').on('click', function (e) {
         counter: true,
         // Images
         dynamicEl: [{
-            'src': 'images/photos/800.png',
-            'thumb': 'images/photos/150.png',
+            'src': 'images/photos/d.jpg',
+            'thumb': 'images/photos/d.jpg',
             'subHtml': 'Lorem ipsum dolor'
         }, {
             'src': 'images/photos/800.png',
