@@ -101,6 +101,7 @@ namespace SocialMediaCampus.Controllers
                         db.SaveChanges();
                     }
 
+
                     //fileMulti.Add(file);
                     //  return Json("Resimler başarılı bir şekilde kaydedildi...",JsonRequestBehavior.AllowGet);
                 }
