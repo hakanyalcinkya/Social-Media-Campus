@@ -20,7 +20,7 @@ namespace SocialMediaCampus.Controllers
             model.UserList = db.Users.ToList();
             model.SharedList = db.ShareModels.ToList();
             model.UploadMultiList = db.UploadMultiFiles.ToList();
-
+            model.CommentList = db.Comments.ToList();
             return View(model);
         }
         [HttpPost]
@@ -200,6 +200,23 @@ namespace SocialMediaCampus.Controllers
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             
+        }
+        [HttpPost]
+        public ActionResult PostComments(string txt,int id)
+        {
+            SiteUsers user = Session["Ogrenci"] as SiteUsers;
+            SharedModel shared = db.ShareModels.Find(id);
+            SiteUsers user1 = db.Users.Find(user.Id);
+            Comments model = new Comments();
+
+            model.CommDate = DateTime.Now;
+            model.CommSiteUsers = user1;
+            model.CommSharedModels = shared;
+            model.TextComments = txt;
+
+            db.Comments.Add(model);
+            db.SaveChanges();
+            return View();
         }
 
         public ActionResult Profil()

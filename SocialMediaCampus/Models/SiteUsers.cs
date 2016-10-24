@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SocialMediaCampus.Class;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -31,5 +32,6 @@ namespace SocialMediaCampus.Models
         public string Permisson { get; set; }
 
         public virtual List<SharedModel> SheredModels { get; set; }
+        public virtual List<Comments> Comments{ get; set; }
     }
 }

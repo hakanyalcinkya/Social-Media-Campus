@@ -14,5 +14,6 @@ namespace SocialMediaCampus.Models
         public DbSet<SharedModel> ShareModels { get; set; }
         public DbSet<UploadMultiFile> UploadMultiFiles { get; set; }
         public DbSet<NumberStudent> numberStudents { get; set; }
+        public DbSet<Comments> Comments { get; set; }
     }
 }

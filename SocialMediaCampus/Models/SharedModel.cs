@@ -25,9 +25,7 @@ namespace SocialMediaCampus.Models
 
         public int UserId { get; set; }
         public virtual SiteUsers Users { get; set; }
-        public virtual List<UploadMultiFile> UploadFileList
-        {
-            get; set;
-        }
-        }
+        public virtual List<UploadMultiFile> UploadFileList { get; set;}
+        public virtual List<Comments> Comments { get; set; }
+    }
     }
