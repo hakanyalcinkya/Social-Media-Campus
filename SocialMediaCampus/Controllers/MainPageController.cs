@@ -57,23 +57,42 @@ namespace SocialMediaCampus.Controllers
                         return Json("Resim başarılı bir şekilde kaydedildi...");
 
                     }
+                    else if (extension == ".doc" || extension == ".docx" || extension == ".pdf")
+                    {
+                        // var fileName = Path.GetFileName(filebase.FileName);
+                        string path = Guid.NewGuid() + "_" + Path.GetExtension(filebase.FileName);
+                        filebase.SaveAs(Server.MapPath("~/UploadFile/file/" + path));
+
+                        SiteUsers user = Session["Ogrenci"] as SiteUsers;
+
+                        SiteUsers user1 = db.Users.Find(user.Id);
+                        SharedModel model = new SharedModel();
+                        model.Text = text;
+                        model.Type = "file";
+                        model.Path = path;
+                        model.Users = user1;
+                        model.SharedDate = DateTime.Now;
+
+                        db.ShareModels.Add(model);
+                        db.SaveChanges();
+
+                        return Json("Dosya başarılı bir şekilde kaydedildi...");
+
+                    }
                     else
                     {
-                        return Json("Resim Kaydedilmedi...");
+                        return Json("Dosya  Kaydedilmedi...");
                     }
-
-
-                    return Json("");
 
                 }
                 else { return Json("Resim kaydedilmedi..."); }
             }
             catch (Exception ex) { return Json("Error While Saving."); }
         }
+        
         [HttpPost]
-        public ActionResult SaveMultiFile()
+        public ActionResult SaveMultiImage()
         {
-            List<HttpPostedFileBase> fileMulti = new List<HttpPostedFileBase>();
             var text = System.Web.HttpContext.Current.Request.Form["HelpString"];
             if (Request.Files.Count > 0)
             {
@@ -89,21 +108,21 @@ namespace SocialMediaCampus.Controllers
                 for (int i = 0; i < Request.Files.Count; i++)
                 {
                     var file = Request.Files[i];
-                    var extension = Path.GetExtension(file.FileName).ToLower();
+                    var extension = Path.GetExtension(file.FileName);
 
                     if (extension == ".jpg" || extension == ".png" || extension == ".jpeg")
                     {
-                        string path = Guid.NewGuid() + "_" + Path.GetExtension(file.FileName);
+                        string path = Guid.NewGuid() + "-" + Path.GetExtension(file.FileName);
                         file.SaveAs(Server.MapPath("~/UploadFile/images/" + path));
                         upload.SharedModelId = model.Id;
                         upload.FilePath = path;
                         db.UploadMultiFiles.Add(upload);
                         db.SaveChanges();
                     }
-
-
-                    //fileMulti.Add(file);
-                    //  return Json("Resimler başarılı bir şekilde kaydedildi...",JsonRequestBehavior.AllowGet);
+                    else
+                    {
+                        return Json("Lüfen bir dosya seciniz", JsonRequestBehavior.AllowGet);
+                    }
                 }
                 db.SaveChanges();
             }
@@ -112,9 +131,77 @@ namespace SocialMediaCampus.Controllers
                 return Json("Lütfen bir resim seçiniz...");
             }
 
+            return Json("Resimler başarılı bir şekilde kaydedildi...", JsonRequestBehavior.AllowGet);
+        }
 
+        [HttpPost]
+        public ActionResult TextPost(string txt)
+        {
+            if (txt != "")
+            {
+                SiteUsers user = Session["Ogrenci"] as SiteUsers;
+
+                SiteUsers user1 = db.Users.Find(user.Id);
+                SharedModel model = new SharedModel();
+                model.Text = txt;
+                model.Type = "text";
+                model.Users = user1;
+                model.SharedDate = DateTime.Now;
+                db.ShareModels.Add(model);
+                db.SaveChanges();
+
+                return RedirectToAction("Shares", "MainPage");
+
+            }
+            else
+            {
+
+            }
             return View();
         }
+
+        [HttpPost]
+        public ActionResult VideoPost(string txt, string link)
+        {
+            MsgJsonResult result = new MsgJsonResult();
+            string linkQ = link.Trim();
+            string[] t = new string[2];
+            string[] words = linkQ.Split('=');
+            for (int i = 0; i < words.Length; i++)
+            {
+                t[i] = words[i];
+            }
+            int linkCount = t[1].Length;
+            if (t[0] == "https://www.youtube.com/watch?v" && linkCount==11)
+            {
+
+                
+                SiteUsers user = Session["Ogrenci"] as SiteUsers;
+
+                SiteUsers user1 = db.Users.Find(user.Id);
+                SharedModel model = new SharedModel();
+                model.Text = txt;
+                model.Type = "video";
+                model.Users = user1;
+                model.Path = "https://www.youtube.com/embed/" + t[1];
+                model.SharedDate = DateTime.Now;
+                db.ShareModels.Add(model);
+                db.SaveChanges();
+
+                result.HasError = true;
+                result.Message = "Video kaydedildi...";
+                return Json(result, JsonRequestBehavior.AllowGet);
+
+            }
+            else
+            {
+                result.HasError = false;
+                result.Message = "Lütfen youtube linkini  giriniz...";
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            
+        }
+
         public ActionResult Profil()
         {
             return View();

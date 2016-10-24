@@ -6,24 +6,13 @@
     ViewBag.Title = "Shares";
 }
 <link href="~/lightGallery-master/lightGallery-master/dist/css/lightgallery.min.css" rel="stylesheet" />
-<script src="~/lightGallery-master/lightGallery-master/dist/js/lightgallery.min.js"></script>
-<script src="~/lightGallery-master/lightGallery-master/demo/js/lg-fullscreen.min.js"></script>
-<script src="~/lightGallery-master/lightGallery-master/demo/js/lg-pager.min.js"></script>
-<script src="~/lightGallery-master/lightGallery-master/demo/js/lg-zoom.js"></script>
+<script src="~/scripts/lightgallery.min.js"></script>
+<script src="~/scripts/lg-fullscreen.min.js"></script>
+<script src="~/scripts/lg-pager.min.js"></script>
+<script src="~/scripts/lg-zoom.min.js"></script>
 
 
 
-<script type="text/javascript">
-  
-    
-    $(document).ready(function () {
-        var id;
-        $('.light').click(function () {
-            id = '#' + $(this).data('id');
-        });
-        $('' + id + '').lightGallery();
-    });
-</script>
 <div class="row">
 
     <div class="col-md-9">
@@ -31,6 +20,7 @@
             @if (Session["Ogrenci"] != null)
             {
                 SiteUsers user = Session["Ogrenci"] as SiteUsers;
+
                 <li class="media media-clearfix-xs">
                     <div class="media-left">
                         <div class="user-wrapper">
@@ -48,13 +38,13 @@
                                             What&acute;s new
                                         </div>
                                         <div class="panel-body">
-                                            <textarea name="status" class="form-control share-text" rows="3" placeholder="Lütfen buraya yazınız..."></textarea>
+                                            <textarea name="txt" id="share" class="form-control share-text" rows="3" placeholder="Lütfen buraya yazınız..."></textarea>
                                         </div>
                                         <div class="panel-footer share-buttons">
                                             <a href="#"><i class="fa fa-photo" data-toggle="modal" data-target="#myModal1"></i></a>
                                             <a href="#"><i class="fa fa-photo hint--top hint--bounce" aria-label="Fotoğraf Yükle" data-toggle="modal" data-target="#myModal"></i></a>
-                                            <a href="#"><i class="fa fa-video-camera"></i></a>
-                                            <button type="submit" class="btn btn-primary btn-xs pull-right display-none" href="#">Post</button>
+                                            <a href="#"><i class="fa fa-video-camera" data-toggle="modal" data-target="#myModal2"></i></a>
+                                            <button type="submit" id="Post" class="btn btn-primary btn-xs pull-right display-none">Gönder</button>
                                         </div>
                                     </div>
                                 </div>
@@ -67,7 +57,7 @@
 
                 List<SharedModel> shared = Model.SharedList.OrderByDescending(x => x.SharedDate).ToList();
 
-                foreach (SharedModel item in shared)
+              foreach (SharedModel item in shared)
                 {
                     if (item.Type == "image")
                     {
@@ -87,7 +77,7 @@
                                                 <div class="row">
                                                     <div class="col-md-8">
                                                         <div class="panel panel-default gallery-grid">
-                                                            <div class="cover overlay hover cover-image-full" style="height: 242px;">
+                                                            <div class="cover overlay hover cover-image-full light" style="height: 242px;">
                                                                 <img src="~/UploadFile/image/@item.Path" alt="cover">
                                                                 <a href="~/UploadFile/image/@item.Path" data-lightbox="@item.Id" class="overlay overlay-full overlay-hover overlay-bg-black clickimage" role="img" style="height: 242px;">
                                                                     <span class="v-center">
@@ -148,7 +138,6 @@
                     }
                     else if (item.Type == "images")
                     {
-
                         <li class="media media-clearfix-xs">
                             <div class="media-left">
                                 <div class="user-wrapper">
@@ -159,83 +148,357 @@
                             </div>
                             <div class="media-body">
                                 <div class="media-body-wrapper">
-                                    <div class="row">
-                                        <div class="media-body">
-                                            <div class="media-body-wrapper">
-                                                <div class="row">
-                                                    <div class="col-md-8">
-                                                        <div  class="panel panel-default gallery-grid">
-                                                            <div id="lightgallery_@item.Id" data-id="lightgallery_@item.Id" class="cover overlay hover cover-image-full light" style="height: 242px;">
-                                                                @{
-                                                                    List<UploadMultiFile> multiFile = Model.UploadMultiList.Where(x => x.SharedModelId == item.Id).ToList();
-                                                                }
-                                                            
-                                                                    @foreach (UploadMultiFile file in multiFile)
-                                                                    {
-                                                                        <a href="~/UploadFile/images/@file.FilePath" >
-                                                                            <img src="~/UploadFile/images/@file.FilePath" alt="@item.Text" height="300" width="470"/>
-                                                                        </a>
-                                                                    }
-                                                                
-                                                             <script>  </script>
-                                                            </div>
-                                                            <div class="panel-body">
-                                                                <div>
-                                                                    <p>@item.Text</p>
-                                                                </div>
-                                                                <ul class="comments">
-                                                                    <li clas="media">
-                                                                        <div class="media-left">
-                                                                            <a href="">
-                                                                                <img src="" class="media-object">
-                                                                            </a>
-                                                                        </div>
-                                                                        <div class="media-body">
-                                                                            <div class="pull-right dropdown" data-show-hover="li" style="display: none;">
-                                                                                <a href="#" data-toggle="dropdown" class="toggle-button">
-                                                                                    <i class="fa fa-pencil"></i>
-                                                                                </a>
-                                                                                <ul class="dropdown-menu" role="menu">
-                                                                                    <li><a href="#">Edit</a></li>
-                                                                                    <li><a href="#">Delete</a></li>
-                                                                                </ul>
-                                                                            </div>
-                                                                            <a href="" class="comment-author">Mary</a>
-                                                                            <span>Wow</span>
-                                                                            <div class="comment-date">2 days</div>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li class="comment-form">
-                                                                        <div class="input-group">
-
-                                                                            <input type="text" class="form-control">
-
-                                                                            <span class="input-group-btn">
-                                                                                <a href="" class="btn btn-default"><i class="fa fa-photo"></i></a>
-                                                                            </span>
-
-                                                                        </div>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <p>@item.Text</p>
+                                            <div class="timeline-added-images light">
+                                                @{
+                                                    List<UploadMultiFile> multiFile = Model.UploadMultiList.Where(x => x.SharedModelId == item.Id).ToList();
+                                                }
+                                                @foreach (UploadMultiFile file in multiFile)
+                                                {
+                                                <a href="~/UploadFile/images/@file.FilePath">
+                                                    <img src="~/UploadFile/images/@file.FilePath" alt="@item.Text" width="165" height="120" />
+                                                </a>
+                                                }
                                             </div>
                                         </div>
-
+                                        <div class="view-all-comments">
+                                            <a href="#">
+                                                <i class="fa fa-comments-o"></i> View all
+                                            </a>
+                                            <span>10 comments</span>
+                                        </div>
+                                        <ul class="comments">
+                                            <li class="media">
+                                                <div class="media-left">
+                                                    <a href="">
+                                                        <img src="images/people/50/guy-5.jpg" class="media-object">
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <div class="pull-right dropdown" data-show-hover="li">
+                                                        <a href="#" data-toggle="dropdown" class="toggle-button">
+                                                            <i class="fa fa-pencil"></i>
+                                                        </a>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li><a href="#">Edit</a></li>
+                                                            <li><a href="#">Delete</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <a href="" class="comment-author pull-left">Bill D.</a>
+                                                    <span>Hi Mary, Nice Party</span>
+                                                    <div class="comment-date">21st September</div>
+                                                </div>
+                                            </li>
+                                            <li class="media">
+                                                <div class="media-left">
+                                                    <a href="">
+                                                        <img src="images/people/50/woman-5.jpg" class="media-object">
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <div class="pull-right dropdown" data-show-hover="li">
+                                                        <a href="#" data-toggle="dropdown" class="toggle-button">
+                                                            <i class="fa fa-pencil"></i>
+                                                        </a>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li><a href="#">Edit</a></li>
+                                                            <li><a href="#">Delete</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <a href="" class="comment-author pull-left">Mary</a>
+                                                    <span>Thanks Bill</span>
+                                                    <div class="comment-date">2 days</div>
+                                                </div>
+                                            </li>
+                                            <li class="media">
+                                                <div class="media-left">
+                                                    <a href="">
+                                                        <img src="images/people/50/guy-5.jpg" class="media-object">
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <div class="pull-right dropdown" data-show-hover="li">
+                                                        <a href="#" data-toggle="dropdown" class="toggle-button">
+                                                            <i class="fa fa-pencil"></i>
+                                                        </a>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li><a href="#">Edit</a></li>
+                                                            <li><a href="#">Delete</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <a href="" class="comment-author pull-left">Bill D.</a>
+                                                    <span>What time did it finish?</span>
+                                                    <div class="comment-date">14 min</div>
+                                                </div>
+                                            </li>
+                                            <li class="comment-form">
+                                                <div class="input-group">
+                                                    <span class="input-group-btn">
+                                                        <a href="" class="btn btn-default"><i class="fa fa-photo"></i></a>
+                                                    </span>
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
-
                         </li>
                     }
+                                                    else if (item.Type == "text")
+                                                    {
+                                                        <li class="media media-clearfix-xs">
+                                                            <div class="media-left">
+                                                                <div class="user-wrapper">
+                                                                    <img src="~/UploadFile/@item.Users.Resimulr" alt="people" class="img-circle" width="80" />
+                                                                    <div class="date">@item.SharedDate.Day @item.SharedDate.ToString("MMM")</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <div class="media-body-wrapper">
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-body">
+                                                                            <p>@item.Text </p>
+                                                                        </div>
+                                                                        <div class="view-all-comments">
+                                                                            <a href="#">
+                                                                                <i class="fa fa-comments-o"></i> View all
+                                                                            </a>
+                                                                            <span>10 comments</span>
+                                                                        </div>
+                                                                        <ul class="comments">
+                                                                            <li class="media">
+                                                                                <div class="media-left">
+                                                                                    <a href="">
+                                                                                        <img src="images/people/50/guy-5.jpg" class="media-object">
+                                                                                    </a>
+                                                                                </div>
+                                                                                <div class="media-body">
+                                                                                    <div class="pull-right dropdown" data-show-hover="li">
+                                                                                        <a href="#" data-toggle="dropdown" class="toggle-button">
+                                                                                            <i class="fa fa-pencil"></i>
+                                                                                        </a>
+                                                                                        <ul class="dropdown-menu" role="menu">
+                                                                                            <li><a href="#">Edit</a></li>
+                                                                                            <li><a href="#">Delete</a></li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                    <a href="" class="comment-author pull-left">Bill D.</a>
+                                                                                    <span>Hi Mary, Nice Party</span>
+                                                                                    <div class="comment-date">21st September</div>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="media">
+                                                                                <div class="media-left">
+                                                                                    <a href="">
+                                                                                        <img src="images/people/50/woman-5.jpg" class="media-object">
+                                                                                    </a>
+                                                                                </div>
+                                                                                <div class="media-body">
+                                                                                    <div class="pull-right dropdown" data-show-hover="li">
+                                                                                        <a href="#" data-toggle="dropdown" class="toggle-button">
+                                                                                            <i class="fa fa-pencil"></i>
+                                                                                        </a>
+                                                                                        <ul class="dropdown-menu" role="menu">
+                                                                                            <li><a href="#">Edit</a></li>
+                                                                                            <li><a href="#">Delete</a></li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                    <a href="" class="comment-author pull-left">Mary</a>
+                                                                                    <span>Thanks Bill</span>
+                                                                                    <div class="comment-date">2 days</div>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="media">
+                                                                                <div class="media-left">
+                                                                                    <a href="">
+                                                                                        <img src="images/people/50/guy-5.jpg" class="media-object">
+                                                                                    </a>
+                                                                                </div>
+                                                                                <div class="media-body">
+                                                                                    <div class="pull-right dropdown" data-show-hover="li">
+                                                                                        <a href="#" data-toggle="dropdown" class="toggle-button">
+                                                                                            <i class="fa fa-pencil"></i>
+                                                                                        </a>
+                                                                                        <ul class="dropdown-menu" role="menu">
+                                                                                            <li><a href="#">Edit</a></li>
+                                                                                            <li><a href="#">Delete</a></li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                    <a href="" class="comment-author pull-left">Bill D.</a>
+                                                                                    <span>What time did it finish?</span>
+                                                                                    <div class="comment-date">14 min</div>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="comment-form">
+                                                                                <div class="input-group">
+                                                                                    <span class="input-group-btn">
+                                                                                        <a href="" class="btn btn-default"><i class="fa fa-photo"></i></a>
+                                                                                    </span>
+                                                                                    <input type="text" class="form-control" />
+                                                                                </div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    }
+                                                    else if (item.Type == "video")
+                                                    {
+                                                        <li class="media media-clearfix-xs" id="september">
+                                                            <div class="media-left">
+                                                                <div class="user-wrapper">
+                                                                    <img src="~/UploadFile/@item.Users.Resimulr" alt="people" class="img-circle" width="80">
+                                                                    <div><a href="#">@item.Users.FirstName </a></div>
+                                                                    <div class="date">@item.SharedDate.Day @item.SharedDate.ToString("MMM")</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <div class="media-body-wrapper">
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-body">
+                                                                            @item.Text
+                                                                        </div>
+                                                                        <!-- 4:3 aspect ratio -->
+                                                                        <div class="embed-responsive embed-responsive-16by9" style="width:500px;">
+                                                                            <iframe class="embed-responsive-item" src="@item.Path"></iframe>
+                                                                        </div>
+                                                                        <div class="view-all-comments"><i class="fa fa-comments-o"></i> Be the first to comment</div>
+                                                                        <ul class="comments">
+                                                                            <li class="comment-form">
+                                                                                <div class="input-group">
+                                                                                    <input type="text" class="form-control" />
+                                                                                    <span class="input-group-btn">
+                                                                                        <a href="" class="btn btn-default"><i class="fa fa-photo"></i></a>
+                                                                                    </span>
+                                                                                </div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    }
+                                                    else if (item.Type == "file")
+                                                    {
+                                                        <li class="media media-clearfix-xs">
+                                                            <div class="media-left">
+                                                                <div class="user-wrapper">
+                                                                    <img src="~/UploadFile/@item.Users.Resimulr" alt="people" class="img-circle" width="80" />
+                                                                    <div class="date">@item.SharedDate.Day @item.SharedDate.ToString("MMM")</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <div class="media-body-wrapper">
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-body">
+                                                                            <div class="boxed">
+                                                                                <a href="#" class="h4 margin-none">Vegetarian Pizza</a>
+                                                                                <div class="media">
+                                                                                    <div class="media-left">
+                                                                                        <a href="~/UploadFile/file/@item.Path"><img src="~/UploadFile/pdf.png" alt="Alternate Text" /> </a>
+                                                                                            <a href="~/UploadFile/file/@item.Path">the document</a>
+                                                                                    </div>
+                                                                                    <div class="media-body">
+                                                                                        <p>@item.Text</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="view-all-comments">
+                                                                            <a href="#">
+                                                                                <i class="fa fa-comments-o"></i> View all
+                                                                            </a>
+                                                                            <span>10 comments</span>
+                                                                        </div>
+                                                                        <ul class="comments">
+                                                                            <li class="media">
+                                                                                <div class="media-left">
+                                                                                    <a href="">
+                                                                                        <img src="images/people/50/guy-5.jpg" class="media-object">
+                                                                                    </a>
+                                                                                </div>
+                                                                                <div class="media-body">
+                                                                                    <div class="pull-right dropdown" data-show-hover="li">
+                                                                                        <a href="#" data-toggle="dropdown" class="toggle-button">
+                                                                                            <i class="fa fa-pencil"></i>
+                                                                                        </a>
+                                                                                        <ul class="dropdown-menu" role="menu">
+                                                                                            <li><a href="#">Edit</a></li>
+                                                                                            <li><a href="#">Delete</a></li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                    <a href="" class="comment-author pull-left">Bill D.</a>
+                                                                                    <span>Hi Mary, Nice Party</span>
+                                                                                    <div class="comment-date">21st September</div>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="media">
+                                                                                <div class="media-left">
+                                                                                    <a href="">
+                                                                                        <img src="images/people/50/woman-5.jpg" class="media-object">
+                                                                                    </a>
+                                                                                </div>
+                                                                                <div class="media-body">
+                                                                                    <div class="pull-right dropdown" data-show-hover="li">
+                                                                                        <a href="#" data-toggle="dropdown" class="toggle-button">
+                                                                                            <i class="fa fa-pencil"></i>
+                                                                                        </a>
+                                                                                        <ul class="dropdown-menu" role="menu">
+                                                                                            <li><a href="#">Edit</a></li>
+                                                                                            <li><a href="#">Delete</a></li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                    <a href="" class="comment-author pull-left">Mary</a>
+                                                                                    <span>Thanks Bill</span>
+                                                                                    <div class="comment-date">2 days</div>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="media">
+                                                                                <div class="media-left">
+                                                                                    <a href="">
+                                                                                        <img src="images/people/50/guy-5.jpg" class="media-object">
+                                                                                    </a>
+                                                                                </div>
+                                                                                <div class="media-body">
+                                                                                    <div class="pull-right dropdown" data-show-hover="li">
+                                                                                        <a href="#" data-toggle="dropdown" class="toggle-button">
+                                                                                            <i class="fa fa-pencil"></i>
+                                                                                        </a>
+                                                                                        <ul class="dropdown-menu" role="menu">
+                                                                                            <li><a href="#">Edit</a></li>
+                                                                                            <li><a href="#">Delete</a></li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                    <a href="" class="comment-author pull-left">Bill D.</a>
+                                                                                    <span>What time did it finish?</span>
+                                                                                    <div class="comment-date">14 min</div>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="comment-form">
+                                                                                <div class="input-group">
+                                                                                    <span class="input-group-btn">
+                                                                                        <a href="" class="btn btn-default"><i class="fa fa-photo"></i></a>
+                                                                                    </span>
+                                                                                    <input type="text" class="form-control" />
+                                                                                </div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                            }
 
-                }
+                                                        }
 
-            }
-
-        </ul>
+                                                    }
+                                                        
+            
+                                                    </ul>
 
     </div>
 </div>
@@ -249,7 +512,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                Lütfen bir resim seçiniz.
+                Lütfen bir dosya seçiniz.
             </div>
             <div class="modal-body">
                 <textarea type="text" class="form-control" rows="4" placeholder="Lütfen birseyler yazın..." name="text" id="text" value=""></textarea>
@@ -272,9 +535,9 @@
                 Lütfen bir resim seçiniz.
             </div>
             <div class="modal-body">
-                <textarea type="text" class="form-control" rows="4" placeholder="Lütfen birseyler yazın..." name="text" id="textMulti" value=""></textarea>
+                <textarea type="text" class="form-control" rows="3" placeholder="Lütfen birseyler yazın..." name="text" id="textMulti" value=""></textarea>
                 <input type="file" class="form-control" id="multiImage" name="files" multiple />
-                <button class="btn btn-success" type="submit" id="uploadMulti" value="">Paylaş</button>
+                <button class="btn btn-success pull-right" type="submit" id="uploadMultiFile" value="">Paylaş</button>
             </div>
             <div class="modal-footer">
                 <div id="warning" class="text-center col-md-12"></div>
@@ -283,10 +546,41 @@
 
     </div>
 </div>
+
+
+
+<div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+               Youtube Linkini aşağdaki text'te yazınız....
+            </div>
+            <div class="modal-body">
+                <textarea type="text" class="form-control" rows="4" placeholder="Lütfen birseyler yazın..." name="text" id="txt" value=""></textarea>
+                <input type="text" class="form-control"  placeholder="Youtube linki buraya yazınız" name="link" id="link" value=""/>
+                <br />
+                <button class="btn btn-success " type="submit" id="video" value="">Paylaş</button>
+            </div>
+            <div class="modal-footer">
+                <div id="warning1" class="text-center col-md-12"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
 <script>
 
 
     $(function () {
+
+
+        $(".light").lightGallery();
 
         var upload = $("<div></div>").addClass("alert alert-success col-md-12");
         var upload1 = $("<div></div>").addClass("alert alert-warning col-md-12");
@@ -298,7 +592,7 @@
 
             data.append("HelpSectionImages", files[0]);
             data.append("HelpString", $_text);
-
+            debugger;
             $.ajax({
                 url: '/MainPage/SaveSingleFile',
                 type: "POST",
@@ -311,7 +605,10 @@
                         $("#warning").append(upload.html(response));
                     $("#file").val('');
                     $("#text").val('');
-
+                    setTimeout(function () {
+                        var url = "/MainPage/Shares";
+                        window.location.href = url;
+                    }, 500);
                 },
                 error: function (er) {
                     $("#warning").append(upload2.html(er));
@@ -323,7 +620,7 @@
 
 
 
-        $('#uploadMulti').click(function () {
+        $('#uploadMultiFile').click(function () {
             var data = new FormData();
             var totalfiles = document.getElementById("multiImage").files.length;
             for (var i = 0; i < totalfiles; i++) {
@@ -334,7 +631,7 @@
             data.append("HelpString", $_text);
             debugger;
             $.ajax({
-                url: '/MainPage/SaveMultiFile',
+                url: '/MainPage/SaveMultiImage',
                 type: "POST",
                 processData: false,
                 data: data,
@@ -355,10 +652,61 @@
             return false;
         });
 
+        $('#Post').click(function () {
+            var $txt = $('#share').val();
+
+            //var $_text = $('#share').val();
+            //data.append("HelpString", $_text);
+            $.ajax({
+                type: "POST",
+                url: '/MainPage/TextPost',
+                data: { txt: $txt },
+                success: function () {
+
+                    setTimeout(function () {
+                        var url = "/MainPage/Shares";
+                        window.location.href = url;
+                    }, 500);
+                }
+
+
+            });
+            return false;
+        });
+
+        $('#video').click(function () {
+            var $link = $('#link').val();
+            var $txt = $('#txt').val();
+            //var $_text = $('#share').val();
+            //data.append("HelpString", $_text);
+            $.ajax({
+                type: "POST",
+                url: '/MainPage/VideoPost',
+                data: { txt: $txt,link:$link },
+                success: function (response) {
+                    if (response.HasError == true) {
+                        $("#warning1").append(upload.html(response.Message));
+                        setTimeout(function () {
+                            var url = "/MainPage/Shares";
+                            window.location.href = url;
+                        }, 1000);
+                    }
+                    else {
+                        $("#warning1").append(upload1.html(response.Message));
+                    }
+                   
+                }
+
+
+            });
+            return false;
+        });
+
+
+
     });
 
 </script>
-
 
 
 
