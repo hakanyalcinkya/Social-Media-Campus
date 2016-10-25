@@ -705,6 +705,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Class\AllComments.cs" />
     <Compile Include="Class\Comments.cs" />
     <Compile Include="Class\UploadMultiFile.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -802,7 +803,6 @@
     <Folder Include="UploadFile\files\" />
     <Folder Include="UploadFile\file\" />
     <Folder Include="UploadFile\images\" />
-    <Folder Include="UploadFile\image\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
@@ -819,7 +819,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>8432</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

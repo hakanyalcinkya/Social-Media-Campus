@@ -218,10 +218,28 @@ namespace SocialMediaCampus.Controllers
             db.SaveChanges();
             return View();
         }
+        [HttpPost]
+        public ActionResult GetComments(int id)
+        {
+            List<Comments> comm = db.Comments.Where(x => x.CommSharedModels.Id == id).OrderByDescending(x => x.CommDate).ToList();
+            List<AllComments> allCom = new List<AllComments>();
+            AllComments comments = new AllComments();
+            foreach (Comments item in comm)
+            {
+                comments.CommDate = item.CommDate ;
+                comments.CommImageUrl = item.CommSiteUsers.Resimulr;
+                comments.CommText = item.TextComments;
+                comments.CommName = item.CommSiteUsers.FirstName +" "+item.CommSiteUsers.LastName[0];
+                allCom.Add(comments);
+            }
+           
+            return Json(allCom,JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult Profil()
         {
             return View();
         }
+     
     }
 }

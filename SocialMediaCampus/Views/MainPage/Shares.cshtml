@@ -59,6 +59,9 @@
 
                 foreach (SharedModel item in shared)
                 {
+
+                    List<Comments> commnents = Model.CommentList.Where(x => x.CommSharedModels.Id == item.Id).OrderByDescending(x => x.CommDate).Take(1).ToList();
+
                     if (item.Type == "image")
                     {
                         <li class="media media-clearfix-xs">
@@ -77,9 +80,9 @@
                                                 <div class="row">
                                                     <div class="col-md-8">
                                                         <div class="panel panel-default gallery-grid">
-                                                            <div class="cover overlay hover cover-image-full light" style="height: 242px;">
-                                                                <img src="~/UploadFile/image/@item.Path" alt="cover">
-                                                                <a href="~/UploadFile/image/@item.Path" data-lightbox="@item.Id" class="overlay overlay-full overlay-hover overlay-bg-black clickimage" role="img" style="height: 242px;">
+                                                            <div class="cover overlay hover cover-image-full light" >
+                                                                <img src="~/UploadFile/image/@item.Path" alt="cover" height="242">
+                                                                <a href="~/UploadFile/image/@item.Path" data-lightbox="@item.Id" class="overlay overlay-full overlay-hover overlay-bg-black clickimage" role="img" >
                                                                     <span class="v-center">
                                                                         <span class="btn btn-white btn-lg btn-circle"><i class="fa fa-plus"></i></span>
                                                                     </span>
@@ -89,15 +92,25 @@
                                                                 <div>
                                                                     <p>@item.Text</p>
                                                                 </div>
-                                                                <ul class="comments">
-                                                                    <li clas="media">
+                                                            </div>
+                                                            <div class="view-all-comments" >
+                                                                <a href="#" data-id="@item.Id" class="Viewall">
+                                                                    <i class="fa fa-comments-o"></i>Tümünü Gör
+                                                                </a>
+                                                                <span>@Model.CommentList.Where(x => x.CommSharedModels.Id == item.Id).Count() Yorum.</span>
+                                                            </div>
+                                                            <ul class="comments com">
+
+                                                                @foreach (Comments comm in commnents)
+                                                                {
+                                                                    <li class="media" >
                                                                         <div class="media-left">
                                                                             <a href="">
-                                                                                <img src="" class="media-object">
+                                                                                <img src="~/UploadFile/@comm.CommSiteUsers.Resimulr" class="media-object" width="50">
                                                                             </a>
                                                                         </div>
                                                                         <div class="media-body">
-                                                                            <div class="pull-right dropdown" data-show-hover="li" style="display: none;">
+                                                                            <div class="pull-right dropdown" data-show-hover="li">
                                                                                 <a href="#" data-toggle="dropdown" class="toggle-button">
                                                                                     <i class="fa fa-pencil"></i>
                                                                                 </a>
@@ -106,24 +119,22 @@
                                                                                     <li><a href="#">Delete</a></li>
                                                                                 </ul>
                                                                             </div>
-                                                                            <a href="" class="comment-author">Mary</a>
-                                                                            <span>Wow</span>
-                                                                            <div class="comment-date">2 days</div>
+                                                                            <a href="" class="comment-author pull-left">@comm.CommSiteUsers.FirstName @comm.CommSiteUsers.LastName[0].</a>
+                                                                            <span>@comm.TextComments</span>
+                                                                            <div class="comment-date">@comm.CommDate.Day</div>
                                                                         </div>
                                                                     </li>
-                                                                    <li class="comment-form">
-                                                                        <div class="input-group">
+                                                                }
+                                                                <li class="comment-form">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-btn">
+                                                                            <a data-id="@item.Id" href="" class="btn btn-default commclick"><i class="fa fa-photo"></i></a>
+                                                                        </span>
+                                                                        <input type="text" class="form-control commtxt " />
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
 
-                                                                            <input type="text" class="form-control">
-
-                                                                            <span class="input-group-btn">
-                                                                                <a href="" class="btn btn-default"><i class="fa fa-photo"></i></a>
-                                                                            </span>
-
-                                                                        </div>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -138,6 +149,7 @@
                     }
                     else if (item.Type == "images")
                     {
+
                         <li class="media media-clearfix-xs">
                             <div class="media-left">
                                 <div class="user-wrapper">
@@ -170,48 +182,6 @@
                                             <span>10 comments</span>
                                         </div>
                                         <ul class="comments">
-                                            <li class="media">
-                                                <div class="media-left">
-                                                    <a href="">
-                                                        <img src="images/people/50/guy-5.jpg" class="media-object">
-                                                    </a>
-                                                </div>
-                                                <div class="media-body">
-                                                    <div class="pull-right dropdown" data-show-hover="li">
-                                                        <a href="#" data-toggle="dropdown" class="toggle-button">
-                                                            <i class="fa fa-pencil"></i>
-                                                        </a>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="#">Edit</a></li>
-                                                            <li><a href="#">Delete</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <a href="" class="comment-author pull-left">Bill D.</a>
-                                                    <span>Hi Mary, Nice Party</span>
-                                                    <div class="comment-date">21st September</div>
-                                                </div>
-                                            </li>
-                                            <li class="media">
-                                                <div class="media-left">
-                                                    <a href="">
-                                                        <img src="images/people/50/woman-5.jpg" class="media-object">
-                                                    </a>
-                                                </div>
-                                                <div class="media-body">
-                                                    <div class="pull-right dropdown" data-show-hover="li">
-                                                        <a href="#" data-toggle="dropdown" class="toggle-button">
-                                                            <i class="fa fa-pencil"></i>
-                                                        </a>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="#">Edit</a></li>
-                                                            <li><a href="#">Delete</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <a href="" class="comment-author pull-left">Mary</a>
-                                                    <span>Thanks Bill</span>
-                                                    <div class="comment-date">2 days</div>
-                                                </div>
-                                            </li>
                                             <li class="media">
                                                 <div class="media-left">
                                                     <a href="">
@@ -409,16 +379,14 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="view-all-comments">
-                                                                            <a href="#">
+                                                                        <div class="view-all-comments ">
+                                                                            <a href="#" >
                                                                                 <i class="fa fa-comments-o"></i>Tümünü Gör
                                                                             </a>
                                                                             <span>@Model.CommentList.Where(x => x.CommSharedModels.Id == item.Id).Count() Yorum.</span>
                                                                         </div>
-                                                                        <ul class="comments">
-                                                                            @{
-                                                                                List<Comments> commnents = Model.CommentList.Where(x => x.CommSharedModels.Id == item.Id).OrderByDescending(x => x.CommDate).Take(1).ToList();
-                                                                            }
+                                                                        <ul class="comments com">
+
                                                                             @foreach (Comments comm in commnents)
                                                                             {
                                                                                 <li class="media">
@@ -443,8 +411,6 @@
                                                                                     </div>
                                                                                 </li>
                                                                             }
-
-
                                                                             <li class="comment-form">
                                                                                 <div class="input-group">
                                                                                     <span class="input-group-btn">
@@ -458,11 +424,11 @@
                                                                 </div>
                                                             </div>
                                                         </li>
-                                                                                        }
+                                                            }
 
-                                                                                    }
+                                                        }
 
-                                                                                }
+                                                    }
 
 
         </ul>
@@ -690,6 +656,45 @@
         });
 
 
+        $(".Viewall").click(function () {
+            var Id = $(this).data('id');
+            var t;
+            $.ajax({
+                url: '/MainPage/GetComments',
+                type: "POST",
+                data: { id:Id },
+                success: function (result) {
+                    debugger;
+                        var data = result;
+                        $.each(data, function (i, item) {
+                            debugger;
+                            t += ' <li class="media"<div class="media-left">' +
+                                ' <a href=""><img src="~/UploadFile/'
+                                + item.CommImageUrl +
+                                '" class="media-object" width="50"></a>' +
+                                '</div> <div class="media-body">' +
+                                '<div class="pull-right dropdown" data-show-hover="li">' +
+                                 ' <a href="#" data-toggle="dropdown" class="toggle-button">' +
+                                 '<i class="fa fa-pencil"></i>  </a>' +
+                                 ' <ul class="dropdown-menu" role="menu">' +
+                                     ' <li><a href="#">Edit</a></li>' +
+                                      '<li><a href="#">Delete</a></li>' +
+                                  '</ul></div>' +
+                                  '<a href="" class="comment-author pull-left">' + item.CommName + '</a>' +
+                                  '<span>' +
+                                  item.CommText + '</span>' +
+                                  '<div class="comment-date">' + item.CommDate.Day +
+                                 '</div></div></li>';
+                            debugger;
+
+                        });
+
+                        $(".com").append(t);
+
+
+                }
+            });
+        });
 
     });
 
