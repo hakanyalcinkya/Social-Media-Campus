@@ -325,6 +325,8 @@
     <Content Include="scripts\lightbox.min.js" />
     <Content Include="scripts\lightgallery.js" />
     <Content Include="scripts\lightgallery.min.js" />
+    <Content Include="scripts\prettydate.js" />
+    <Content Include="scripts\prettydate.min.js" />
     <Content Include="scripts\vendor\all.js" />
     <Content Include="scripts\vendor\charts\all.js" />
     <Content Include="scripts\vendor\charts\easy-pie\jquery.easypiechart.js" />
@@ -803,6 +805,7 @@
     <Folder Include="UploadFile\files\" />
     <Folder Include="UploadFile\file\" />
     <Folder Include="UploadFile\images\" />
+    <Folder Include="UploadFile\image\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

@@ -9,6 +9,5 @@ namespace SocialMediaCampus.Models
     {
         public bool HasError { get; set; }
         public string Message { get; set; }
-        public string url { get; set; }
     }
 }
