@@ -1,4 +1,195 @@
-﻿
+﻿@using SocialMediaCampus.Class
+
+@model  SiteUsers
+
 @{
     ViewBag.Title = "Profil";
 }
+<div class="media media-grid media-clearfix-xs">
+    <div class="media-body">
+        <div class="row " id="editprofil">
+            <div class="width-250 width-auto-xs col-md-4">
+                <div class="panel panel-default widget-user-1 text-center">
+                    <div class="avatar" >
+                        <img src="~/UploadFile/profilImage/@Model.Resimulr" id="proimage" width="110" height="100" class="img-circle">
+                        <br />
+                        <label class="btn btn-success btn-sm btn-file">
+                            Image <input type="file" id="file" name="file"  style="display: none;">
+                        </label>
+                    </div>
+                    <div class="text-right">
+                        <button class="btn btn-sm btn-warning"  style="display:none;" type="submit" id="ProfilImg">Yükle</button>
+                    </div>
+                    <div class="profile-icons margin-none" >
+                        <span><i class="fa fa-file"></i> </span>
+                        <span><i class="fa fa-photo"></i> </span>
+                        <span><i class="fa fa-video-camera"></i> </span>
+                    </div>
+                </div>
+                <!-- Contact -->
+            </div>
+            <div class="col-md-5" id="profilhide">
+                <div class="panel panel-default">
+                    <div class="panel-heading panel-heading-gray">
+                        <a href="#" class="btn btn-white btn-xs pull-right" id="editPro" data-id="@Model.Id"><i class="fa fa-pencil"></i></a>
+                        <i class="fa fa-fw fa-info-circle"></i> Hakkında
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list-unstyled profile-about margin-none">
+                            <li class="padding-v-5">
+                                <div class="row">
+                                    <div class="col-sm-4"><span class="text-muted">Ad</span></div>
+                                    <div class="col-sm-8">@Model.FirstName</div>
+                                </div>
+                            </li>
+                            <li class="padding-v-5">
+                                <div class="row">
+                                    <div class="col-sm-4"><span class="text-muted">Soyad</span></div>
+                                    <div class="col-sm-8">@Model.LastName</div>
+                                </div>
+                            </li>
+                            <li class="padding-v-5">
+                                <div class="row">
+                                    <div class="col-sm-4"><span class="text-muted">E-Posta</span></div>
+                                    <div class="col-sm-8">@Model.EMail</div>
+                                </div>
+                            </li>
+                            <li class="padding-v-5">
+                                <div class="row">
+                                    <div class="col-sm-4"><span class="text-muted">Öğrenci Numrası</span></div>
+                                    <div class="col-sm-8">@Model.Number</div>
+                                </div>
+                            </li>
+                            <li class="padding-v-5">
+                                <div class="row">
+                                    <div class="col-sm-4"><span class="text-muted">Şifre</span></div>
+                                    <div class="col-sm-8">@Model.Password</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6" id="profilForm" style="display:none;">
+                <div class="panel panel-default">
+                    <div class="panel-heading panel-heading-gray">
+                        <button type="submit" class="btn btn-success btn-sm pull-right" id="editProfil" data-id="@Model.Id">Güncelle</button>
+                        <a href="#" class="btn btn-warning btn-sm pull-right" id="editIptal"><i class="fa fa">İptal</i></a>
+                        <i class="fa fa"></i>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-xs-3 text-left"><span class="text-muted">Ad</span></div>
+                                <div class="col-xs-9"> <input type="text" class="col-xs-12 form-control txtFirstName" value="@Model.FirstName" /></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-3 text-left"><span class="text-muted">Soyad</span></div>
+                                <div class="col-xs-9"> <input type="text" class="col-xs-12 form-control txtLastName" value="@Model.LastName" /></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-3 text-left"><span class="text-muted">E-Posta</span></div>
+                                <div class="col-xs-9"> <input type="text" class="col-xs-12 form-control txtEmail" value="@Model.EMail" /></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-3 text-left"><span class="text-muted">Öğrenci Numarası</span></div>
+                                <div class="col-xs-9"> <input type="text" class="col-xs-12 form-control txtNumber" value="@Model.Number" /></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-3 text-left"><span class="text-muted">Şifre</span></div>
+                                <div class="col-xs-9"> <input type="password" class="col-xs-12 form-control txtPassword" value="@Model.Password" /></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 warning">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    $(function () {
+        var upload = $("<div></div>").addClass("alert alert-success col-md-12");
+        $('#editPro').click(function () {
+            if (document.getElementById('profilForm').style.display == 'none') {
+                document.getElementById('profilForm').style.display = 'block';
+                $('#profilhide').hide();
+            }
+            else {
+                document.getElementById('profilForm').style.display = 'none';
+            }
+        });
+        $('#editIptal').click(function () {
+            if (document.getElementById('profilForm').style.display == 'block') {
+                document.getElementById('profilForm').style.display = 'none';
+                $('#profilhide').show();
+            }
+            else {
+                document.getElementById('profilForm').style.display = 'none';
+            }
+        });
+        $(":file").change(function () {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = imageIsLoaded;
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+        $('#ProfilImg').click(function () {
+            var dataFrom = new FormData();
+            var files = $("#file").get(0).files;
+            debugger;
+            dataFrom.append("ProfilImage", files[0]);
+            $.ajax({
+                url: '/MainPage/UploadProfilImage',
+                type: "POST",
+                processData: false,
+                data: dataFrom,
+                dataType: 'json',
+                contentType: false,
+                success: function () {
+                    $('#ProfilImg').hide();
+                }
+            });
+        });
+        function imageIsLoaded(e) {
+            $('#proimage').attr('src', e.target.result);
+            $('#ProfilImg').show();
+        };
+        $('#editProfil').click(function () {
+            var data = {
+                id: $(this).data('id'),
+                txtFirstName: $('.txtFirstName').val(),
+                txtLastName: $('.txtLastName').val(),
+                txtEMail: $('.txtEmail').val(),
+                txtNumber: $('.txtNumber').val(),
+                txtPassword: $('.txtPassword').val()
+            }
+            $.ajax({
+                type: "POST",
+                url: '/MainPage/ProfilEdit',
+                data: data,
+                success: function (response) {
+                    if (response != null || response != '')
+                        $(".warning").append(upload.html(response));
+                    setTimeout(function () {
+                        var url = "/MainPage/Profil";
+                        window.location.href = url;
+                    }, 500);
+                },
+                error: function (er) {
+                    $(".warning").append(upload.html(er));
+                }
+
+            });
+        });
+    });
+</script>

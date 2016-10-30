@@ -19,6 +19,7 @@
     <script src="~/scripts/bootstrap.min.js"></script>
     <script src="~/scripts/modernizr-2.8.3.js"></script>
     <script src="~/social-1/js/vendor/all.js"></script>
+    <script src="~/scripts/vendor/all.js"></script>
 
       <link href="~/social-1/css/app/app.css" rel="stylesheet" />
    
@@ -42,7 +43,7 @@
                     <a class="navbar-brand navbar-brand-primary hidden-xs" href="/MainPage/Shares">Sosyal Medya</a>
                 </div>
                 <div class="collapse navbar-collapse" id="main-nav">
-                        @*<ul class="nav navbar-nav hidden-xs">
+                   @*<ul class="nav navbar-nav hidden-xs">
                             <!-- messages -->
                             <li class="dropdown notifications hidden-xs hidden-sm">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -95,28 +96,31 @@
                             </li>
                             <!-- // END messages -->
                         </ul>*@
+                    @{
+                        SocialMediaCampus.Class.SiteUsers user = Session["Ogrenci"] as SocialMediaCampus.Class.SiteUsers;
+                    }
                     <ul class="nav navbar-nav navbar-user">
-                       
+
                         <!-- User -->
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="~/UploadFile/Profile.png" width="35" alt="Bill" class="img-circle" /> Bill <span class="caret"></span>
+                                <img src="~/UploadFile/profilImage/@user.Resimulr" width="35" height="35" alt="Bill" class="img-circle" /> @user.FirstName <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="profile.html">Profile</a></li>
+                                <li><a href="/MainPage/Profil">Profile</a></li>
                                 @*<li><a href="messages.html">Messages</a></li>*@
-                                <li><a href="login.html">Logout</a></li>
+                                <li><a href="/MainPage/LogOut">Logout</a></li>
                             </ul>
                         </li>
                     </ul>
-                        <ul class="nav navbar-nav navbar-right hidden-xs">
-                            <li class="pull-right">
-                                <a href="#sidebar-chat" data-effect="st-effect-1" data-toggle="sidebar-menu">
-                                    <i class="fa fa-comments"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                    <ul class="nav navbar-nav navbar-right hidden-xs">
+                        <li class="pull-right">
+                            <a href="#sidebar-chat" data-effect="st-effect-1" data-toggle="sidebar-menu">
+                                <i class="fa fa-comments"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <!-- Sidebar component with st-effect-1 (set on the toggle button within the navbar) -->
@@ -130,7 +134,7 @@
             </div>
         </div>
         <!-- Sidebar component with st-effect-1 (set on the toggle button within the navbar) -->
-        @*<div class="sidebar sidebar-chat right sidebar-size-2 sidebar-offset-0 chat-skin-white sidebar-visible-mobile" id=sidebar-chat>
+        <div class="sidebar sidebar-chat right sidebar-size-2 sidebar-offset-0 chat-skin-white sidebar-visible-mobile" id=sidebar-chat>
                 <div class="split-vertical">
                     <div class="chat-search">
                         <input type="text" class="form-control" placeholder="Search" />
@@ -149,10 +153,10 @@
                                             <div class="media">
                                                 <div class="pull-left">
                                                     <span class="status"></span>
-                                                    <img src="images/people/110/guy-6.jpg" width="40" class="img-circle" />
+                                                    <img src="/UploadFile/@user.Resimulr" width="40" class="img-circle" />
                                                 </div>
                                                 <div class="media-body">
-                                                    <div class="contact-name">Jonathan S.</div>
+                                                    <div class="contact-name">@user.FirstName</div>
                                                     <small>"Free Today"</small>
                                                 </div>
                                             </div>
@@ -350,7 +354,7 @@
                     <input type="text" class="form-control" placeholder="Type message..." />
                 </div>
             </script>
-            <div class="chat-window-container"></div>*@
+            <div class="chat-window-container"></div>
         <!-- sidebar effects OUTSIDE of st-pusher: -->
         <!-- st-effect-1, st-effect-2, st-effect-4, st-effect-5, st-effect-9, st-effect-10, st-effect-11, st-effect-12, st-effect-13 -->
         <!-- content push wrapper -->
@@ -414,67 +418,13 @@
             }
         };
     </script>
-    <!-- Vendor Scripts Bundle
-      Includes all of the 3rd party JavaScript libraries above.
-      The bundle was generated using modern frontend development tools that are provided with the package
-      To learn more about the development process, please refer to the documentation.
-      Do not use it simultaneously with the separate bundles above. -->
-    <!-- Vendor Scripts Standalone Libraries -->
-    <!-- <script src="js/vendor/core/all.js"></script> -->
-    <!-- <script src="js/vendor/core/jquery.js"></script> -->
-    <!-- <script src="js/vendor/core/bootstrap.js"></script> -->
-    <!-- <script src="js/vendor/core/breakpoints.js"></script> -->
-    <!-- <script src="js/vendor/core/jquery.nicescroll.js"></script> -->
-    <!-- <script src="js/vendor/core/isotope.pkgd.js"></script> -->
-    <!-- <script src="js/vendor/core/packery-mode.pkgd.js"></script> -->
-    <!-- <script src="js/vendor/core/jquery.grid-a-licious.js"></script> -->
-    <!-- <script src="js/vendor/core/jquery.cookie.js"></script> -->
-    <!-- <script src="js/vendor/core/jquery-ui.custom.js"></script> -->
-    <!-- <script src="js/vendor/core/jquery.hotkeys.js"></script> -->
-    <!-- <script src="js/vendor/core/handlebars.js"></script> -->
-    <!-- <script src="js/vendor/core/jquery.hotkeys.js"></script> -->
-    <!-- <script src="js/vendor/core/load_image.js"></script> -->
-    <!-- <script src="js/vendor/core/jquery.debouncedresize.js"></script> -->
-    <!-- <script src="js/vendor/tables/all.js"></script> -->
-    <!-- <script src="js/vendor/forms/all.js"></script> -->
-    <!-- <script src="js/vendor/media/all.js"></script> -->
-    <!-- <script src="js/vendor/player/all.js"></script> -->
-    <!-- <script src="js/vendor/charts/all.js"></script> -->
-    <!-- <script src="js/vendor/charts/flot/all.js"></script> -->
-    <!-- <script src="js/vendor/charts/easy-pie/jquery.easypiechart.js"></script> -->
-    <!-- <script src="js/vendor/charts/morris/all.js"></script> -->
-    <!-- <script src="js/vendor/charts/sparkline/all.js"></script> -->
-    <!-- <script src="js/vendor/maps/vector/all.js"></script> -->
-    <!-- <script src="js/vendor/tree/jquery.fancytree-all.js"></script> -->
-    <!-- <script src="js/vendor/nestable/jquery.nestable.js"></script> -->
-    <!-- <script src="js/vendor/angular/all.js"></script> -->
-    <!-- App Scripts Bundle
-      Includes Custom Application JavaScript used for the current theme/module;
-      Do not use it simultaneously with the standalone modules below. -->
+
     <script src="~/social-1/js/app/app.js"></script>
-    
+
     <!-- App Scripts Standalone Modules
       As a convenience, we provide the entire UI framework broke down in separate modules
       Some of the standalone modules may have not been used with the current theme/module
       but ALL the modules are 100% compatible -->
-    <!-- <script src="js/app/essentials.js"></script> -->
-    <!-- <script src="js/app/layout.js"></script> -->
-    <!-- <script src="js/app/sidebar.js"></script> -->
-    <!-- <script src="js/app/media.js"></script> -->
-    <!-- <script src="js/app/player.js"></script> -->
-    <!-- <script src="js/app/timeline.js"></script> -->
-    <!-- <script src="js/app/chat.js"></script> -->
-    <!-- <script src="js/app/maps.js"></script> -->
-    <!-- <script src="js/app/charts/all.js"></script> -->
-    <!-- <script src="js/app/charts/flot.js"></script> -->
-    <!-- <script src="js/app/charts/easy-pie.js"></script> -->
-    <!-- <script src="js/app/charts/morris.js"></script> -->
-    <!-- <script src="js/app/charts/sparkline.js"></script> -->
-    <!-- App Scripts CORE [social-1]:
-          Includes the custom JavaScript for this theme/module;
-          The file has to be loaded in addition to the UI modules above;
-          app.js already includes main.js so this should be loaded
-          ONLY when using the standalone modules; -->
-    <!-- <script src="js/app/main.js"></script> -->
+
 </body>
 </html>

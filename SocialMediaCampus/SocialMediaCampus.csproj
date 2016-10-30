@@ -698,8 +698,7 @@
     <None Include="scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="scripts\model.js" />
     <Content Include="UploadFile\pdf.png" />
-    <Content Include="UploadFile\Profile.png" />
-    <Content Include="UploadFile\profilImage\child-1.jpg" />
+    <Content Include="UploadFile\profilImage\Profile.png" />
     <Content Include="Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
@@ -716,12 +715,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="HelperViewModel\SharedViewModel.cs" />
+    <Compile Include="Models\SharedViewModel.cs" />
     <Compile Include="Models\MsgJsonResult.cs" />
-    <Compile Include="Models\NumberStudent.cs" />
-    <Compile Include="Models\RoleType.cs" />
-    <Compile Include="Models\SharedModel.cs" />
-    <Compile Include="Models\SiteUsers.cs" />
+    <Compile Include="Class\NumberStudent.cs" />
+    <Compile Include="Class\RoleType.cs" />
+    <Compile Include="Class\SharedModel.cs" />
+    <Compile Include="Class\SiteUsers.cs" />
     <Compile Include="Models\SocialMediaDBEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -790,7 +789,7 @@
     <Content Include="Views\MainPage\Profil.cshtml" />
     <Content Include="scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="scripts\jquery-3.1.1.min.map" />
-    <Content Include="Views\SiteUsers\Index.cshtml" />
+    <Content Include="Views\SiteUsers\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

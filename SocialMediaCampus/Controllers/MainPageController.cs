@@ -1,10 +1,10 @@
 ﻿using SocialMediaCampus.Class;
-using SocialMediaCampus.HelperViewModel;
 using SocialMediaCampus.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -125,7 +125,7 @@ namespace SocialMediaCampus.Controllers
                 for (int i = 0; i < Request.Files.Count; i++)
                 {
                     var file = Request.Files[i];
-                    if (result.HasError==true)
+                    if (result.HasError == true)
                     {
                         string path = Guid.NewGuid() + "-" + Path.GetExtension(file.FileName);
                         file.SaveAs(Server.MapPath("~/UploadFile/images/" + path));
@@ -145,7 +145,7 @@ namespace SocialMediaCampus.Controllers
             {
                 result.HasError = false;
                 result.Message = "Lütfen bir resim seçiniz...";
-                return Json(result,JsonRequestBehavior.AllowGet);
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -241,6 +241,7 @@ namespace SocialMediaCampus.Controllers
             foreach (Comments item in comm)
             {
                 AllComments comments = new AllComments();
+                comments.Id = item.Id;
                 comments.CommDate = item.CommDate.ToString();
                 comments.CommImageUrl = item.CommSiteUsers.Resimulr;
                 comments.CommText = item.TextComments;
@@ -253,8 +254,102 @@ namespace SocialMediaCampus.Controllers
 
         public ActionResult Profil()
         {
-            return View();
+            SiteUsers user1 = null;
+            if (Session["Ogrenci"] != null)
+            {
+                SiteUsers user = null;
+                user = Session["Ogrenci"] as SiteUsers;
+                user1 = db.Users.Find(user.Id);
+            }
+            else
+            {
+                RedirectToAction("Login", "SiteUsers");
+            }
+            return View(user1);
         }
+        [HttpPost]
+        public ActionResult ProfilEdit(string txtFirstName, string txtLastName, string txtEMail, string txtNumber, string txtPassword, int id)
+        {
+            SiteUsers user = db.Users.FirstOrDefault(x => x.Id == id);
 
+            if (user != null)
+            {
+                user.FirstName = txtFirstName;
+                user.LastName = txtLastName;
+                user.EMail = txtEMail;
+                user.Number = txtNumber;
+                user.Password = txtPassword;
+
+                db.SaveChanges();
+
+                if (Session["Ogrenci"] != null)
+                {
+                    Session["Ogrenci"] = user;
+                }
+
+            }
+
+            return Json("Profiliniz güncellenmiştir.", JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult UploadProfilImage()
+        {
+            try
+            {
+                if (Request.Files.Count > 0)
+                {
+                    HttpPostedFileBase filebase = Request.Files[0];
+                    var extension = Path.GetExtension(filebase.FileName).ToLower();
+                    if (extension == ".jpg" || extension == ".png" || extension == ".jpeg")
+                    {
+                        SiteUsers user = Session["Ogrenci"] as SiteUsers;
+                        SiteUsers user1 = db.Users.Find(user.Id);
+                        string fullPath = Request.MapPath("~/Uploadfile/profilImage/" + user1.Resimulr);
+                        if (System.IO.File.Exists(fullPath))
+                        {
+                            System.IO.File.Delete(fullPath);
+                        }
+                        string path = Guid.NewGuid() + "_" + Path.GetExtension(filebase.FileName);
+                        filebase.SaveAs(Server.MapPath("~/UploadFile/profilImage/" + path));
+                        user1.Resimulr = path;
+                        db.SaveChanges();
+                        Session["Ogrenci"] = db.Users.Find(user.Id);
+                        return Json("", JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json("Dosya  Kaydedilmedi...");
+                    }
+
+                }
+                else { return Json("Resim kaydedilmedi..."); }
+            }
+            catch (Exception ex)
+            {
+                return Json("Error While Saving.");
+            }
+        }
+        public ActionResult LogOut()
+        {
+            Session.Clear();
+            return RedirectToAction("Login", "SiteUsers");
+        }
+        [HttpPost]
+        public ActionResult DeleteComment(int id)
+        {
+            string Id = id.ToString();
+            if (Id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Comments comm = db.Comments.Find(id);
+            if (comm == null)
+            {
+                return HttpNotFound();
+            }
+            db.Comments.Remove(comm);
+            db.SaveChanges();
+            return Json("",JsonRequestBehavior.AllowGet);
+        }
     }
 }

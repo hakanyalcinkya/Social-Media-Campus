@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace SocialMediaCampus.HelperViewModel
+namespace SocialMediaCampus.Models
 {
     public class SharedViewModel
     {

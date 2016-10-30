@@ -11,5 +11,6 @@ namespace SocialMediaCampus.Class
         public string CommText { get; set; }
         public string CommDate { get; set; }
         public string CommName { get; set; }
+        public int Id { get; set; }
     }
 }

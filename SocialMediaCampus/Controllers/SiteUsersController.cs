@@ -1,4 +1,5 @@
-﻿using SocialMediaCampus.Models;
+﻿using SocialMediaCampus.Class;
+using SocialMediaCampus.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace SocialMediaCampus.Controllers
     {
         private SocialMediaDBEntities db = new SocialMediaDBEntities();
         // GET: SiteUsers
-        public ActionResult Index()
+        public ActionResult Login()
         {
             return View();
         }

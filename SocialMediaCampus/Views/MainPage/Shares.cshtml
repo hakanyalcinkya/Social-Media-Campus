@@ -1,6 +1,6 @@
-﻿@using SocialMediaCampus.HelperViewModel
-@using SocialMediaCampus.Models
+﻿@using SocialMediaCampus.Models
 @using SocialMediaCampus.Class
+
 @model SharedViewModel
 @{
     ViewBag.Title = "Shares";
@@ -23,7 +23,7 @@
                 <li class="media media-clearfix-xs">
                     <div class="media-left">
                         <div class="user-wrapper">
-                            <img src="~/UploadFile/@user.Resimulr" alt="people" class="img-circle" width="80" />
+                            <img src="~/UploadFile/profilImage/@user.Resimulr" alt="people" class="img-circle" width="80" height="80"/>
                             <div><a href="#">@user.FirstName @user.LastName[0].</a></div>
                             <div class="date">@DateTime.Now.Day @DateTime.Now.ToString("MMM") </div>
                         </div>
@@ -37,7 +37,7 @@
                                             What&acute;s new
                                         </div>
                                         <div class="panel-body">
-                                            <textarea name="txt" id="share" class="form-control share-text" rows="3" placeholder="Lütfen buraya yazınız..."></textarea>
+                                            <textarea name="txt" id="share" class="form-control share-text" cols="50" rows="4" placeholder="Lütfen buraya yazınız..."></textarea>
                                         </div>
                                         <div class="panel-footer share-buttons">
                                             <a href="#"><i class="fa fa-photo" data-toggle="modal" data-target="#myModal1"></i></a>
@@ -58,15 +58,13 @@
 
                 foreach (SharedModel item in shared)
                 {
-
                     List<Comments> commnents = Model.CommentList.Where(x => x.CommSharedModels.Id == item.Id).OrderByDescending(x => x.CommDate).Take(1).ToList();
-
                     if (item.Type == "image")
                     {
                         <li class="media media-clearfix-xs">
                             <div class="media-left">
                                 <div class="user-wrapper">
-                                    <img src="~/UploadFile/@item.Users.Resimulr" alt="people" class="img-circle" width="80">
+                                    <img src="~/UploadFile/profilImage/@item.Users.Resimulr" alt="people" class="img-circle" width="80" height="80">
                                     <div><a href="#">@item.Users.FirstName @item.Users.LastName[0].</a></div>
                                     <div class="date" prettydate data-date-format="DD.MM.YYYY HH:mm:ss">@item.SharedDate</div>
                                 </div>
@@ -80,7 +78,7 @@
                                                     <div class="col-md-8">
                                                         <div class="panel panel-default gallery-grid">
                                                             <div class="cover overlay hover cover-image-full light">
-                                                                <img src="~/UploadFile/image/@item.Path" alt="cover" height="242">
+                                                                <img src="~/UploadFile/image/@item.Path" alt="cover" height="242" >
                                                                 <a href="~/UploadFile/image/@item.Path" data-lightbox="@item.Id" class="overlay overlay-full overlay-hover overlay-bg-black clickimage" role="img">
                                                                     <span class="v-center">
                                                                         <span class="btn btn-white btn-lg btn-circle"><i class="fa fa-plus"></i></span>
@@ -112,7 +110,7 @@
                                                                     <li class="media">
                                                                         <div class="media-left">
                                                                             <a href="">
-                                                                                <img src="~/UploadFile/@comm.CommSiteUsers.Resimulr" class="media-object" width="50">
+                                                                                <img src="~/UploadFile/profilImage/@comm.CommSiteUsers.Resimulr" class="media-object" width="50" height="50">
                                                                             </a>
                                                                         </div>
                                                                         <div class="media-body">
@@ -121,8 +119,8 @@
                                                                                     <i class="fa fa-pencil"></i>
                                                                                 </a>
                                                                                 <ul class="dropdown-menu" role="menu">
-                                                                                    <li><a href="#">Edit</a></li>
-                                                                                    <li><a href="#">Delete</a></li>
+                                                                                    @*<li><a href="#"  data-del="@comm.Id" id="delComm" >Edit</a></li>*@
+                                                                                    <li><a href="#" class="btn btn-sm delComm" data-del="@comm.Id" >Delete</a></li>
                                                                                 </ul>
                                                                             </div>
                                                                             <a href="" class="comment-author pull-left">@comm.CommSiteUsers.FirstName @comm.CommSiteUsers.LastName[0].</a>
@@ -147,11 +145,10 @@
                     }
                     else if (item.Type == "images")
                     {
-
                         <li class="media media-clearfix-xs">
                             <div class="media-left">
                                 <div class="user-wrapper">
-                                    <img src="~/UploadFile/@item.Users.Resimulr" alt="people" class="img-circle" width="80">
+                                    <img src="~/UploadFile/profilImage/@item.Users.Resimulr" alt="people" class="img-circle" width="80" height="80">
                                     <div><a href="#">@item.Users.FirstName @item.Users.LastName[0].</a></div>
                                     <div class="date" prettydate data-date-format="DD.MM.YYYY HH:mm:ss">@item.SharedDate</div>
                                 </div>
@@ -193,7 +190,7 @@
                                                 <li class="media">
                                                     <div class="media-left">
                                                         <a href="">
-                                                            <img src="~/UploadFile/@comm.CommSiteUsers.Resimulr" class="media-object" width="50">
+                                                            <img src="~/UploadFile/profilImage/@comm.CommSiteUsers.Resimulr" class="media-object" width="50" height="50">
                                                         </a>
                                                     </div>
                                                     <div class="media-body">
@@ -202,8 +199,8 @@
                                                                 <i class="fa fa-pencil"></i>
                                                             </a>
                                                             <ul class="dropdown-menu" role="menu">
-                                                                <li><a href="#">Edit</a></li>
-                                                                <li><a href="#">Delete</a></li>
+                                                                @*<li><a href="#"  data-del="@comm.Id" id="delComm" >Edit</a></li>*@
+                                                                <li><a href="#" class="btn btn-sm delComm" data-del="@comm.Id">Delete</a></li>
                                                             </ul>
                                                         </div>
                                                         <a href="" class="comment-author pull-left">@comm.CommSiteUsers.FirstName @comm.CommSiteUsers.LastName[0].</a>
@@ -224,7 +221,7 @@
                                                         <li class="media media-clearfix-xs">
                                                             <div class="media-left">
                                                                 <div class="user-wrapper">
-                                                                    <img src="~/UploadFile/@item.Users.Resimulr" alt="people" class="img-circle" width="80" />
+                                                                    <img src="~/UploadFile/profilImage/@item.Users.Resimulr" alt="people" class="img-circle" width="80" height="80"/>
                                                                     <div><a href="#">@user.FirstName @user.LastName[0].</a></div>
                                                                     <div class="date" prettydate data-date-format="DD.MM.YYYY HH:mm:ss">@item.SharedDate</div>
                                                                 </div>
@@ -257,7 +254,7 @@
                                                                                 <li class="media">
                                                                                     <div class="media-left">
                                                                                         <a href="">
-                                                                                            <img src="~/UploadFile/@comm.CommSiteUsers.Resimulr" class="media-object" width="50">
+                                                                                            <img src="~/UploadFile/profilImage/@comm.CommSiteUsers.Resimulr" class="media-object" width="50" height="50">
                                                                                         </a>
                                                                                     </div>
                                                                                     <div class="media-body">
@@ -266,8 +263,8 @@
                                                                                                 <i class="fa fa-pencil"></i>
                                                                                             </a>
                                                                                             <ul class="dropdown-menu" role="menu">
-                                                                                                <li><a href="#">Edit</a></li>
-                                                                                                <li><a href="#">Delete</a></li>
+                                                                                                @*<li><a href="#"  data-del="@comm.Id" id="delComm" >Edit</a></li>*@
+                                                                                                <li><a href="#" class="btn btn-sm delComm" data-del="@comm.Id">Delete</a></li>
                                                                                             </ul>
                                                                                         </div>
                                                                                         <a href="" class="comment-author pull-left">@comm.CommSiteUsers.FirstName @comm.CommSiteUsers.LastName[0].</a>
@@ -288,7 +285,7 @@
                                                         <li class="media media-clearfix-xs" id="september">
                                                             <div class="media-left">
                                                                 <div class="user-wrapper">
-                                                                    <img src="~/UploadFile/@item.Users.Resimulr" alt="people" class="img-circle" width="80">
+                                                                    <img src="~/UploadFile/profilImage/@item.Users.Resimulr" alt="people" class="img-circle" width="80" height="80">
                                                                     <div><a href="#">@item.Users.FirstName </a></div>
                                                                     <div class="date" prettydate data-date-format="DD.MM.YYYY HH:mm:ss">@item.SharedDate</div>
                                                                 </div>
@@ -323,7 +320,7 @@
                                                                                 <li class="media">
                                                                                     <div class="media-left">
                                                                                         <a href="">
-                                                                                            <img src="~/UploadFile/@comm.CommSiteUsers.Resimulr" class="media-object" width="50">
+                                                                                            <img src="~/UploadFile/profilImage/@comm.CommSiteUsers.Resimulr" class="media-object" width="50" height="50">
                                                                                         </a>
                                                                                     </div>
                                                                                     <div class="media-body">
@@ -332,8 +329,8 @@
                                                                                                 <i class="fa fa-pencil"></i>
                                                                                             </a>
                                                                                             <ul class="dropdown-menu" role="menu">
-                                                                                                <li><a href="#">Edit</a></li>
-                                                                                                <li><a href="#">Delete</a></li>
+                                                                                                @*<li><a href="#"  data-del="@comm.Id" id="delComm" >Edit</a></li>*@
+                                                                                                <li><a href="#" class="btn btn-sm delComm" data-del="@comm.Id">Delete</a></li>
                                                                                             </ul>
                                                                                         </div>
                                                                                         <a href="" class="comment-author pull-left">@comm.CommSiteUsers.FirstName @comm.CommSiteUsers.LastName[0].</a>
@@ -353,7 +350,7 @@
                                                         <li class="media media-clearfix-xs ">
                                                             <div class="media-left">
                                                                 <div class="user-wrapper">
-                                                                    <img src="~/UploadFile/@item.Users.Resimulr" alt="people" class="img-circle" width="80" />
+                                                                    <img src="~/UploadFile/profilImage/@item.Users.Resimulr" alt="people" class="img-circle" width="80" height="80"/>
                                                                     <div><a href="#">@user.FirstName @user.LastName[0].</a></div>
                                                                     <div class="date" prettydate data-date-format="DD.MM.YYYY HH:mm:ss">@item.SharedDate</div>
                                                                 </div>
@@ -394,7 +391,7 @@
                                                                                 <li class="media">
                                                                                     <div class="media-left">
                                                                                         <a href="">
-                                                                                            <img src="~/UploadFile/@comm.CommSiteUsers.Resimulr" class="media-object" width="50">
+                                                                                            <img src="~/UploadFile/profilImage/@comm.CommSiteUsers.Resimulr" class="media-object" width="50" height="50">
                                                                                         </a>
                                                                                     </div>
                                                                                     <div class="media-body">
@@ -403,8 +400,8 @@
                                                                                                 <i class="fa fa-pencil"></i>
                                                                                             </a>
                                                                                             <ul class="dropdown-menu" role="menu">
-                                                                                                <li><a href="#">Edit</a></li>
-                                                                                                <li><a href="#">Delete</a></li>
+                                                                                                @*<li><a href="#"  data-del="@comm.Id" id="delComm" >Edit</a></li>*@
+                                                                                                <li><a href="#" class="btn btn-sm delComm" data-del="@comm.Id">Delete</a></li>
                                                                                             </ul>
                                                                                         </div>
                                                                                         <a href="" class="comment-author pull-left">@comm.CommSiteUsers.FirstName @comm.CommSiteUsers.LastName[0].</a>
@@ -501,8 +498,6 @@
 
 
     $(function () {
-
-
         $(".light").lightGallery();
 
         var upload = $("<div></div>").addClass("alert alert-success col-md-12");
@@ -512,7 +507,6 @@
             var data = new FormData();
             var files = $("#file").get(0).files;
             var $_text = $('#text').val();
-            debugger;
             data.append("HelpSectionImages", files[0]);
             data.append("HelpString", $_text);
             $.ajax({
@@ -540,8 +534,6 @@
             return false;
         });
 
-
-
         $('#uploadMultiFile').click(function () {
             var data = new FormData();
             var totalfiles = document.getElementById("multiImage").files.length;
@@ -551,7 +543,6 @@
             }
             var $_text = $('#textMulti').val();
             data.append("HelpString", $_text);
-           
             $.ajax({
                 url: '/MainPage/SaveMultiImage',
                 type: "POST",
@@ -560,7 +551,6 @@
                 dataType: 'json',
                 contentType: false,
                 success: function (response) {
-                    debugger;
                     if (response.HasError == true) {
                         $("#warning").append(upload.html(response.Message));
                         $("#file").val('');
@@ -576,7 +566,6 @@
                 },
                 error: function (er) {
                     $("#warning3").append(upload2.html(er));
-                    debugger;
                 }
 
             });
@@ -604,7 +593,6 @@
             });
             return false;
         });
-
 
         $('.commclick').click(function () {
 
@@ -654,10 +642,8 @@
             return false;
         });
 
-
         $(".Viewall").click(function () {
             var Id = $(this).data('id');
-
             $.ajax({
                 url: '/MainPage/GetComments',
                 type: "POST",
@@ -665,15 +651,12 @@
                 success: function (result) {
                     var data = result;
                     var t = "";
-
                     $("ul#comment_" + Id + " .media").remove();
-
                     $.each(data, function (i, item) {
-
                         t += '<li class="media">' +
                             '   <div class="media-left">' +
-                            '       <a href="#"><img src="/UploadFile/' + item.CommImageUrl + "\"" +
-                            '           class="media-object" width="50"></a>' +
+                            '       <a href="#"><img src="/UploadFile/profilImage/' + item.CommImageUrl + "\"" +
+                            '           class="media-object" width="50" height="50"></a>' +
                             '   </div>' +
                             '   <div class="media-body">' +
                             '       <div class="pull-right dropdown" data-show-hover="li">' +
@@ -683,7 +666,7 @@
                             '           </a>' +
                             '           <ul class="dropdown-menu" role="menu">' +
                             '               <li><a href="#">Edit</a></li>' +
-                            '               <li><a href="#">Delete</a></li>' +
+                            '               <li><a href="#" class="btn btn-sm delComm" data-del="' + item.Id + '">Delete</a></li>' +
                             '           </ul>' +
                             '       </div>' +
                             '       <a href="#" class="comment-author pull-left">' + item.CommName + '</a>' +
@@ -692,15 +675,21 @@
                             '   </div>' +
                             '</li>';
                     });
-
                     $("ul#comment_" + Id).append(t);
                     $("ul#comment_" + Id + " .comment-date").prettydate("prettify");
-
                     window.showHover();
                 }
             });
         });
-
+        $('.delComm').click(function () {
+            var delId = $(this).data('del');
+            debugger;
+            $.ajax({
+                url: '/MainPage/DeleteComment',
+                type: "POST",
+                data: { id: delId }
+            });
+        });
     });
 
 </script>
